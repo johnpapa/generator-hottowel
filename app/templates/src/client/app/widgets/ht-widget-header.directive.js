@@ -14,7 +14,6 @@
         //      title="Movie"
         //      allow-collapse="true" </div>
         var directive = {
-//            link: link,
             scope: {
                 'title': '@',
                 'subtitle': '@',
@@ -25,9 +24,5 @@
             restrict: 'EA'
         };
         return directive;
-
-//        function link(scope, element, attrs) {
-//            attrs.$set('class', 'widget-head');
-//        }
     }
 })();

@@ -1,4 +1,4 @@
-﻿<nav class="navbar navbar-fixed-top navbar-inverse">
+<nav class="navbar navbar-fixed-top navbar-inverse">
     <div class="navbar-header">
         <a href="/" class="navbar-brand"><span class="brand-title">{{vm.title}}</span></a>
         <a class="btn navbar-btn navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -11,8 +11,8 @@
         <div class="pull-right navbar-logo">
             <ul class="nav navbar-nav pull-right">
                 <li>
-                    <a href="http://www.johnpapa.net/hottowel-angular" target="_blank">
-                        Created by John Papa
+                    <a ng-href="{{vm.tagline.link}}" target="_blank">
+                        {{vm.tagline.text}}
                     </a>
                 </li>
                 <li class="dropdown dropdown-big">

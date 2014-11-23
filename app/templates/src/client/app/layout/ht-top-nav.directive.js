@@ -13,7 +13,7 @@
             controllerAs: 'vm',
             restrict: 'EA',
             scope: {
-            	'tagline': '@',
+                'tagline': '=',
                 'title': '='
             },
             templateUrl: 'app/layout/ht-top-nav.html'

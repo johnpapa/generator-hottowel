@@ -12,6 +12,10 @@
         vm.busyMessage = 'Please wait ...';
         vm.isBusy = true;
         vm.showSplash = true;
+        vm.tagline = {
+            text: 'Created by John Papa',
+            link: 'http://twitter.com/john_papa'
+        };
 
         activate();
 
