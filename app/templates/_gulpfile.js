@@ -92,13 +92,9 @@ gulp.task('images', function() {
     log('Compressing, caching, and copying images');
     return gulp
         .src(paths.images)
-        // .pipe(plug.imagemin({
-        //     optimizationLevel: 3
-        // }))
-        //TODO: cache is ignoring files when the build folder is clean. need to reset.
-        .pipe(plug.cache(plug.imagemin({
+        .pipe(plug.imagemin({
             optimizationLevel: 3
-        })))
+        }))
         .pipe(gulp.dest(dest));
 });
 
