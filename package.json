@@ -1,7 +1,7 @@
 {
   "name": "generator-hottowel",
   "version": "0.0.0",
-  "description": "Yeoman generator",
+  "description": "Yeoman generator for HotTowel Angular",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "johnpapa/generator-hottowel",
