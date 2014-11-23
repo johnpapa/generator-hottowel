@@ -7,7 +7,7 @@ describe('htSidebar directive: ', function () {
     var isOpenClass = 'dropy';
     var scope;
 
-    beforeEach(module('app.widgets'));
+    beforeEach(module('app'));
 
     beforeEach(inject(function($compile, $rootScope) {
         // The minimum necessary template HTML for this spec.
