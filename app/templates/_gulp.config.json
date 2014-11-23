@@ -3,7 +3,6 @@
   "server": "./src/server/",
   "htmltemplates": "./src/client/app/**/*.html",
   "css": [
-    "./src/client/content/customtheme.css",
     "./src/client/content/styles.css"
   ],
   "js": [
