@@ -47,27 +47,22 @@ Install these NPM packages globally:
 `npm install -g bower gulp nodemon`
 
 ## Installing Packages
-- Open terminal
 - Type `npm install`
-
-`npm install` will install bower packages too, but you can do it manually.
-- Open terminal
 - Type `bower install`
 
 ## Running
-Runs locally, no database required.
-
-Type `gulp serve-dev` and browse to `http://localhost:7300`
+Type `gulp serve-dev --sync`
 
 ## Linting
-Type `gulp jshint` to run code analysis on the code.
+Type `gulp analyze` to run code analysis on the code. This runs jshint, jscs, and plato.
 
-Type `gulp spy` to run code analysis using a watch.
+## Tests
+Type `gulp test` to run the unit tests (via karma, mocha, sinon).
 
 ## How It Works
 The app is quite simple and has 2 main routes:
 - dashboard
-- admin list
+- admin
 
 ### The Modules
 The app has 4 feature modules and depends on a series of external modules and custom but cross-app modules
@@ -80,8 +75,8 @@ app --> [
         app.widgets,
 		app.core --> [
 			ngAnimate,
-			ngRoute,
 			ngSanitize,
+			ui.router,
 			blocks.exception,
 			blocks.logger,
 			blocks.router
