@@ -10,6 +10,8 @@
 npm install -g yo
 ```
 
+>You might have to sudo or run as administrator to install yo. Or better yet, refer to these [instructions on how to not require sudo](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md)
+
 ### QuickStart with generator-hottowel
 
 To install generator-hottowel from npm, run:
@@ -18,9 +20,11 @@ To install generator-hottowel from npm, run:
 npm install -g generator-hottowel
 ```
 
-Run the generator:
+Create a new folder and run the generator
 
 ```bash
+mkdir myapp
+cd myapp
 yo hottowel
 ```
 
