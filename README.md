@@ -1,41 +1,69 @@
 # generator-hottowel [![Build Status](https://secure.travis-ci.org/johnpapa/generator-hottowel.png?branch=master)](https://travis-ci.org/johnpapa/generator-hottowel)
 
-> [Yeoman](http://yeoman.io) generator
-
-## Getting Started
-
-### Installing Yeoman
-
-```bash
-npm install -g yo
-```
-
->You might have to sudo or run as administrator to install yo. Or better yet, refer to these [instructions on how to not require sudo](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md)
-
-### QuickStart with generator-hottowel
-
-To install generator-hottowel from npm, run:
-
-```bash
-npm install -g generator-hottowel
-```
-
-Create a new folder and run the generator
-
-```bash
-mkdir myapp
-cd myapp
-yo hottowel
-```
-
-# Generating Code with HotTowel
-HotTowel Angular starter project
+Create an Angular application using the HotTowel style (via a [Yeoman](http://yeoman.io) generator)
 
 >*Opinionated AngularJS style guide for teams by [@john_papa](//twitter.com/john_papa)*
 
 >More details about the styles and patterns used in this app can be found in my [AngularJS Style Guide](https://github.com/johnpapa/angularjs-styleguide) and my [AngularJS Patterns: Clean Code](http://jpapa.me/ngclean) course at [Pluralsight](http://pluralsight.com/training/Authors/Details/john-papa) and working in teams. 
 
-## Structure
+
+## Prerequisites
+
+1. Install [Node.js](http://nodejs.org) 
+ - on OSX use [homebrew](http://brew.sh) `brew install node`
+ - on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
+
+2. Install Yeoman `npm install -g yo`
+
+3. Install these NPM packages globally
+
+    ```bash
+    npm install -g bower gulp nodemon`
+    ```
+
+    >Refer to these [instructions on how to not require sudo](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md)
+
+## QuickStart
+
+1. Install generator-hottowel 
+    ```bash
+    npm install -g generator-hottowel
+    ```
+
+2. Create a new folder and change directory to it
+    ```bash
+    mkdir myapp
+    cd myapp
+    ```
+
+3. Run the generator
+    ```bash
+    yo hottowel
+    ```
+## Running HotTowel
+
+### Linting
+ - Run code analysis using `gulp analyze`. This runs jshint, jscs, and plato.
+
+### Tests
+ - Run the unit tests using `gulp test` (via karma, mocha, sinon).
+
+### Running in dev mode
+ - Run the project with `gulp serve-dev --sync`
+
+ - `--sync` opens it in a browser and updates the browser with any files changes.
+
+### Building the project
+ - Build the optimized project using `gulp build`
+ - This create the optimized code for the project and puts it in the build folder
+
+### Running the optimized code
+ - Run the optimize project from the build folder with `gulp serve-build`
+
+## Exploring HotTowel
+HotTowel Angular starter project
+
+### Structure
 The structure also contains a gulpfile.js and a server folder. The server is there just so we can serve the app using node. Feel free to use any server you wish.
 
 	/src
@@ -43,30 +71,11 @@ The structure also contains a gulpfile.js and a server folder. The server is the
 			/app
 			/content
 	
-## Pre-Requisites
-Install [Node.js](http://nodejs.org)
+### Installing Packages
+When you generate the project it should run these commands, but if you notice missing pavkages, run these again:
 
-Install these NPM packages globally:
-
-`npm install -g bower gulp nodemon`
-
-## Installing Packages
-- Type `npm install`
-- Type `bower install`
-
-## Running
-Type `gulp serve-dev --sync`
-
-## Linting
-Type `gulp analyze` to run code analysis on the code. This runs jshint, jscs, and plato.
-
-## Tests
-Type `gulp test` to run the unit tests (via karma, mocha, sinon).
-
-## How It Works
-The app is quite simple and has 2 main routes:
-- dashboard
-- admin
+ - `npm install`
+ - `bower install`
 
 ### The Modules
 The app has 4 feature modules and depends on a series of external modules and custom but cross-app modules
@@ -88,23 +97,23 @@ app --> [
     ]
 ```
 
-## core Module
+#### core Module
 Core modules are ones that are shared throughout the entire application and may be customized for the specific application. Example might be common data services.
 
 This is an aggregator of modules that the application will need. The `core` module takes the blocks, common, and Angular sub-modules as dependencies. 
 
-## blocks Modules
+#### blocks Modules
 Block modules are reusable blocks of code that can be used across projects simply by including them as dependencies.
 
-### blocks.logger Module
+##### blocks.logger Module
 The `blocks.logger` module handles logging across the Angular app.
 
-### blocks.exception Module
+##### blocks.exception Module
 The `blocks.exception` module handles exceptions across the Angular app.
 
 It depends on the `blocks.logger` module, because the implementation logs the exceptions.
 
-### blocks.router Module
+##### blocks.router Module
 The `blocks.router` module contains a routing helper module that assists in adding routes to the $routeProvider.
 
 ## License
