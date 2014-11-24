@@ -13,7 +13,8 @@
   "specs": [
     "./src/client/app/**/*.spec.js"
   ],
-  "nodejs": [
+  "alljs": [
+    "./src/client/app/**/*.js",
     "./src/server/**/*.js"
   ],
   "fonts": [

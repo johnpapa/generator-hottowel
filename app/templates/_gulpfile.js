@@ -25,8 +25,8 @@ gulp.task('analyze', function() {
     log('Analyzing source with JSHint, JSCS, and Plato');
 
     var merge = require('merge-stream');
-    var jshint = analyzejshint([].concat(paths.js, paths.specs, paths.nodejs));
-    var jscs = analyzejscs([].concat(paths.js, paths.nodejs));
+    var jshint = analyzejshint(paths.alljs);
+    var jscs = analyzejscs(paths.alljs);
     startPlatoVisualizer();
 
     return merge(jshint, jscs);
