@@ -10,9 +10,7 @@
 npm install -g yo
 ```
 
-### Yeoman Generators
-
-Yeoman travels light. He didn't pack any generators when he moved in. You can think of a generator like a plug-in. You get to choose what type of application you wish to create, such as a Backbone application or even a Chrome extension.
+### QuickStart with generator-hottowel
 
 To install generator-hottowel from npm, run:
 
@@ -20,7 +18,7 @@ To install generator-hottowel from npm, run:
 npm install -g generator-hottowel
 ```
 
-Finally, initiate the generator:
+Run the generator:
 
 ```bash
 yo hottowel
