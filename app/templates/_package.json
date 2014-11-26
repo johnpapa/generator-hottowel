@@ -1,5 +1,7 @@
 {
-  "name": "package",
+  "name": "HotTowel",
+  "description": "Project Generated from HotTowel Angular",
+  "repository": "TBD",
   "version": "0.0.0",
   "scripts": {
     "init": "npm install",

@@ -31,11 +31,11 @@ var HottowelGenerator = yeoman.generators.Base.extend({
     },
 
     scaffoldFolders: function () {
-        this.mkdir("src");
-        this.mkdir("src/client");
-        this.mkdir("src/client/app");
+        this.mkdir('src');
+        this.mkdir('src/client');
+        this.mkdir('src/client/app');
         if (this.expressServer) {
-            this.mkdir("src/server");
+            this.mkdir('src/server');
         }
     },
 
@@ -45,6 +45,7 @@ var HottowelGenerator = yeoman.generators.Base.extend({
         this.src.copy('_gulpfile.js', 'gulpfile.js');
         this.src.copy('_gulp.config.json', 'gulp.config.json');
         this.src.copy('_karma.conf.js', 'karma.conf.js');
+        this.src.copy('_README.md', 'README.md');
 
         this.directory('src/client/app');
         this.directory('src/client/content');
@@ -77,7 +78,7 @@ var HottowelGenerator = yeoman.generators.Base.extend({
 //        });
               this.npmInstall();
 //              this.bowerInstall();
-              console.log("\nEverything Setup !!!\n");
+              console.log('\nEverything Setup !!!\n');
     },
 
     end: function () {
