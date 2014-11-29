@@ -277,6 +277,10 @@ function serve(args) {
         options.nodeArgs = [args.debug + '=5858'];
     }
 
+    if (args.mode === 'build') {
+        gulp.watch('./src/client/app/**/*.*', ['build']);
+    }
+
     return plug.nodemon(options)
         .on('start', function() {
             startBrowserSync();
