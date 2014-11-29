@@ -12,8 +12,8 @@
     }
 
     var config = {
-        appErrorPrefix: '[HotTowel Error] ',
-        appTitle: 'HotTowel Angular Demo'
+        appErrorPrefix: '[<%= appName %> Error] ',
+        appTitle: '<%= appName %>'
     };
 
     core.value('config', config);
@@ -26,7 +26,7 @@
             $logProvider.debugEnabled(true);
         }
         exceptionHandlerProvider.configure(config.appErrorPrefix);
-        routerHelperProvider.configure({docTitle: 'HotTowel: '});
+        routerHelperProvider.configure({docTitle: config.appTitle + ': '});
     }
 
 })();

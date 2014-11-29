@@ -1,6 +1,4 @@
 // Karma configuration
-// Generated on Sun Jul 13 2014 09:06:13 GMT-0400 (EDT)
-
 module.exports = function (config) {
     config.set({
 
@@ -13,7 +11,7 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            './src/client/test/bindPolyfill.js',
+            './src/client/test/bind-polyfill.js',
 
             './bower_components/jquery/dist/jquery.js',
             './bower_components/angular/angular.js',

@@ -415,11 +415,11 @@ function formatPercent(num, precision) {
 function getHeader() {
     var pkg = require('./package.json');
     var template = ['/**',
-        ' * <%= pkg.name %> - <%= pkg.description %>',
-        ' * @authors <%= pkg.authors %>',
-        ' * @version v<%= pkg.version %>',
-        ' * @link <%= pkg.homepage %>',
-        ' * @license <%= pkg.license %>',
+        ' * <%%= pkg.name %> - <%%= pkg.description %>',
+        ' * @authors <%%= pkg.authors %>',
+        ' * @version v<%%= pkg.version %>',
+        ' * @link <%%= pkg.homepage %>',
+        ' * @license <%%= pkg.license %>',
         ' */',
         ''].join('\n');
     return plug.header(template, {pkg : pkg});

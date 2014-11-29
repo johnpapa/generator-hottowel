@@ -6,7 +6,7 @@
         /* Since Angular has this but needs to load, this gives us the class early. */
         .ng-hide { display: none!important; }
     </style>
-    <title ng-bind="title">Hot Towel Angular</title>
+    <title ng-bind="title"><%= appName %></title>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
@@ -30,7 +30,7 @@
         <div id="splash-page" ng-show="false">
             <div class="page-splash">
                 <div class="page-splash-message">
-                    Hot Towel Angular
+                    <%= appName %>
                 </div>
                 <div class="progress progress-striped active page-progress-bar">
                     <div class="bar"></div>

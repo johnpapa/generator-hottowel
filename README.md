@@ -38,8 +38,18 @@ Create an Angular application using the HotTowel style (via a [Yeoman](http://ye
 
 3. Run the generator
     ```bash
-    yo hottowel
+    yo hottowel helloWorld
     ```
+
+## HotTowel Options
+
+### Application Name
+ - Pass in the app's name to avoid being prompted for it
+
+    ```bash
+    yo hottowel [appName]
+    ```
+
 ## Running HotTowel
 
 ### Linting
