@@ -8,11 +8,11 @@
     /* @ngInject */
     function ShellController($timeout, config, logger) {
         var vm = this;
-        vm.title = config.appTitle;
         vm.busyMessage = 'Please wait ...';
         vm.isBusy = true;
         vm.showSplash = true;
-        vm.tagline = {
+        vm.navline = {
+            title: config.appTitle,
             text: 'Created by John Papa',
             link: 'http://twitter.com/john_papa'
         };

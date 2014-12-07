@@ -13,8 +13,7 @@
             controllerAs: 'vm',
             restrict: 'EA',
             scope: {
-                'tagline': '=',
-                'title': '='
+                'navline': '='
             },
             templateUrl: 'app/layout/ht-top-nav.html'
         };
