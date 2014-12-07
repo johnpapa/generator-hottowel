@@ -11,7 +11,7 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            './src/client/test/bind-polyfill.js',
+            './src/client/test-helpers/bind-polyfill.js',
 
             './bower_components/jquery/dist/jquery.js',
             './bower_components/angular/angular.js',
@@ -25,10 +25,9 @@ module.exports = function (config) {
             './bower_components/extras.angular.plus/ngplus-overlay.js',
 
             /* MOCHA */
-            './src/client/test/spec-helper.js',
-            './src/client/test/mock-data.js',
-            './src/client/test/stubs.js',
-//            './src/client/**/*.spec.js',
+            './src/client/test-helpers/spec-helper.js',
+            './src/client/test-helpers/mock-data.js',
+            './src/client/test-helpers/stubs.js',
 
             './src/client/app/app.module.js',
             './src/client/app/**/*.module.js',

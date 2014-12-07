@@ -15,7 +15,8 @@
   ],
   "alljs": [
     "./src/client/app/**/*.js",
-    "./src/server/**/*.js"
+    "./src/server/**/*.js",
+    "./src/client/test-helpers/**/*.js"
   ],
   "fonts": [
     "./bower_components/font-awesome/fonts/**/*.*"

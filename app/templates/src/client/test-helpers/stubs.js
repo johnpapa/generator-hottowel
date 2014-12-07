@@ -1,4 +1,4 @@
-/* jshint -W079 */
+/* jshint -W117 */
 var stubs = (function() {
     var service = {
         dataservice: {
