@@ -7,6 +7,7 @@
 
     logger.$inject = ['$log', 'toastr'];
 
+    /* @ngInject */
     function logger($log, toastr) {
         var service = {
             showToasts: true,

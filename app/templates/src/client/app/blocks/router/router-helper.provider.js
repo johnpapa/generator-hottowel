@@ -4,7 +4,11 @@
     angular
         .module('blocks.router')
         .provider('routerHelper', routerHelperProvider);
+    
 
+    routerHelperProvider.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider'];
+        
+    /* @ngInject */
     function routerHelperProvider($locationProvider, $stateProvider, $urlRouterProvider) {
         /* jshint validthis:true */
         var config = {
@@ -18,8 +22,12 @@
             angular.extend(config, cfg);
         };
 
+        this.$get = RouterHelper;
+        
+        RouterHelper.$inject = ['$location', '$rootScope', '$state', 'logger'];
+        
         /* @ngInject */
-        this.$get = function RouterHelper($location, $rootScope, $state, logger) {
+        function RouterHelper($location, $rootScope, $state, logger) {
             var handlingStateChangeError = false;
             var hasOtherwise = false;
             var stateCounts = {
@@ -90,6 +98,6 @@
                     }
                 );
             }
-        };
+        }
     }
 })();

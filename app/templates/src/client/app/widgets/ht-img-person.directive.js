@@ -5,6 +5,8 @@
         .module('app.widgets')
         .directive('htImgPerson', htImgPerson);
 
+    htImgPerson.$inject = ['config'];
+    
     /* @ngInject */
     function htImgPerson (config) {
         //Usage:

@@ -6,7 +6,7 @@
         .directive('htWidgetHeader', htWidgetHeader);
 
     /* @ngInject */
-    function htWidgetHeader () {
+    function htWidgetHeader() {
         //Usage:
         //<div ht-widget-header title="vm.map.title"></div>
         // Creates:
