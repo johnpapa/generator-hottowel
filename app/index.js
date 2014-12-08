@@ -73,7 +73,7 @@ var HottowelGenerator = generators.Base.extend({
     appFiles: function () {
         this.directory('src/client/app');
         this.directory('src/client/content');
-        this.directory('src/client/test');
+        this.directory('src/client/test-helpers');
 
         this.template('src/client/_index.html', 'src/client/index.html');
 
