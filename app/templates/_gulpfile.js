@@ -437,7 +437,7 @@ function notify(){
         contentImage: path.join(__dirname, 'gulp.png'),
         icon: path.join(__dirname, 'gulp.png'),
         title: 'Gulp Build',
-        subtitle: 'Deployed!',
-        message: 'Check the build folder!'
+        subtitle: 'Deployed to the build folder',
+        message: 'gulp serve-dev --sync'
     });
 }
