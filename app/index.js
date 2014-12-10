@@ -67,7 +67,10 @@ var HottowelGenerator = generators.Base.extend({
         this.template('_gulp.config.json', 'gulp.config.json');
         this.template('_karma.conf.js', 'karma.conf.js');
         this.template('_README.md', 'README.md');
+    },
 
+    assets: function () {
+        this.copy('gulp.png', 'gulp.png');
     },
 
     appFiles: function () {
