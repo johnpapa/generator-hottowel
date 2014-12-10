@@ -3,6 +3,8 @@ var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var del = require('del');
 var glob = require('glob');
+var notifier = require('node-notifier');
+var path = require('path');
 var paths = require('./gulp.config.json');
 var plug = require('gulp-load-plugins')();
 var reload = browserSync.reload;
@@ -147,11 +149,7 @@ gulp.task('build', ['inject-and-rev', 'images', 'fonts'], function() {
     // clean out the temp folder when done
     del(paths.temp);
 
-    return gulp
-        .src('').pipe(plug.notify({
-            onLast: true,
-            message: 'Deployed code!'
-        }));
+    notify();
 });
 
 /**
@@ -427,4 +425,18 @@ function getHeader() {
         ' */',
         ''].join('\n');
     return plug.header(template, {pkg : pkg});
+}
+
+/**
+ * Show OS level notification using node-notifier
+ */
+function notify(){
+    notifier.notify({
+        sound: 'Bottle',
+        contentImage: path.join(__dirname, 'gulp.png'),
+        icon: path.join(__dirname, 'gulp.png'),
+        title: 'Gulp Build',
+        subtitle: 'Deployed!',
+        message: 'Check the build folder!'
+    });
 }
