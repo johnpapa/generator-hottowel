@@ -26,5 +26,6 @@
   ],
   "build": "./build/",
   "temp": "./.tmp/",
-  "report": "./report/"
+  "report": "./report/",
+  "bower": "./bower_components/"
 }

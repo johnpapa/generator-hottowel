@@ -1,4 +1,3 @@
-/* jshint camelcase:false */
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var del = require('del');
@@ -66,7 +65,7 @@ gulp.task('wiredep', function () {
     
     return gulp.src(index)
         .pipe(wiredep({
-            directory: './bower_components/',
+            directory: paths.bower,
             bowerJson: require('./bower.json'),
             ignorePath: '../..' // bower files will be relative to the root
         }))
@@ -127,14 +126,14 @@ gulp.task('inject-and-rev', ['templatecache', 'wiredep'], function() {
                 plug.rev(), 
                 projectHeader
             ],
-            css_libs: [plug.minifyCss(), 'concat', plug.rev()],
+            csslibs: [plug.minifyCss(), 'concat', plug.rev()],
             js: [
                 plug.ngAnnotate({add: true}), 
                 plug.uglify(),
                 plug.rev(), 
                 projectHeader
             ],
-            js_libs: [plug.uglify(), plug.rev()]
+            jslibs: [plug.uglify(), plug.rev()]
         }))
         .pipe(gulp.dest(paths.build));
 });
@@ -276,14 +275,13 @@ function serve(args) {
     }
 
     if (args.mode === 'build') {
-        gulp.watch('./src/client/app/**/*.*', ['build']);
+        gulp.watch(paths.client + '**/*.*', ['build']);
     }
 
     return plug.nodemon(options)
         .on('start', function() {
             startBrowserSync();
         })
-        //.on('change', tasks)
         .on('restart', function() {
             log('restarted!');
             setTimeout(function () {
@@ -359,10 +357,13 @@ function startTests(singleRun, done) {
         var savedEnv = process.env;
         savedEnv.NODE_ENV = 'dev';
         savedEnv.PORT = 8888;
-        child = fork('src/server/app.js', childProcessCompleted);
-    } else {
-        excludeFiles.push('./src/client/test/midway/**/*.spec.js');
-    }
+        child = fork(paths.server + 'app.js', childProcessCompleted);
+    } //else {
+        // Exclude test file here. 
+        // Useful to exclude midway integration tests, 
+        // if you do not want to start the server
+        //excludeFiles.push('./src/client/test/midway/**/*.spec.js');
+    //}
 
     karma.start({
         configFile: __dirname + '/karma.conf.js',
