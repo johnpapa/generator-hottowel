@@ -1,7 +1,27 @@
+/* jshint -W079 */
 var mockData = (function() {
     return {
-        getMockPeople: getMockPeople
+        getMockPeople: getMockPeople,
+        getMockMessageCount: 7,
+        getMockStates: getMockStates
     };
+
+    function getMockStates() {
+        return [
+            {
+                state: 'dashboard',
+                config: {
+                    url: '/',
+                    templateUrl: 'app/dashboard/dashboard.html',
+                    title: 'dashboard',
+                    settings: {
+                        nav: 1,
+                        content: '<i class="fa fa-dashboard"></i> Dashboard'
+                    }
+                }
+            }
+        ];
+    }
 
     function getMockPeople() {
         return [

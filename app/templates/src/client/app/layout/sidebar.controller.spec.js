@@ -2,41 +2,43 @@
 describe('layout', function () {
     describe('SidebarController', function () {
         var controller;
+        var views = {
+            dashboard: 'app/dashboard/dashboard.html',
+            admin: 'app/admin/admin.html'
+        };
 
         beforeEach(function() {
-            module('app', specHelper.fakeLogger);
-            specHelper.injector(function($controller, $httpBackend, $location, $rootScope, $state) {});
+            bard.appModule('app.layout');
+            bard.inject('$controller', '$httpBackend', '$location',
+                        '$rootScope', '$state', 'routerHelper');
         });
 
         beforeEach(function () {
+            routerHelper.configureStates(mockData.getMockStates(), '/');
+            $httpBackend.when('GET', views.dashboard).respond(200);
             controller = $controller('SidebarController');
+            $rootScope.$apply();
         });
 
-        it('should have isCurrent() for / to return `current`', function () {
-            $httpBackend.when('GET', 'app/dashboard/dashboard.html').respond(200);
+        bard.verifyNoOutstandingHttpRequests();
+
+        it('should have isCurrent() for / to return `current`', function() {
             $location.path('/');
             $httpBackend.flush();
-            $rootScope.$apply();
             expect(controller.isCurrent($state.current)).to.equal('current');
         });
 
-        it('should have isCurrent() for /customers to return `current`', function () {
-            $httpBackend.when('GET', 'app/dashboard/dashboard.html').respond(200);
-            $httpBackend.when('GET', 'app/customers/customers.html').respond(200);
-            $location.path('/customers');
+        it('should have isCurrent() for /admin to return `current`', function() {
+            $httpBackend.when('GET', views.admin).respond(200);
+            $location.path('/admin');
             $httpBackend.flush();
-            $rootScope.$apply();
             expect(controller.isCurrent($state.current)).to.equal('current');
         });
 
-        it('should have isCurrent() for non route not return `current`', function () {
-            $httpBackend.when('GET', 'app/dashboard/dashboard.html').respond(200);
+        it('should have isCurrent() for non route not return `current`', function() {
             $location.path('/invalid');
             $httpBackend.flush();
-            $rootScope.$apply();
             expect(controller.isCurrent({title: 'invalid'})).not.to.equal('current');
         });
-
-        specHelper.verifyNoOutstandingHttpRequests();
     });
 });

@@ -18,7 +18,7 @@
             templateUrl: 'app/layout/ht-top-nav.html'
         };
 
-	    /* @ngInject */
+        /* @ngInject */
         function TopNavController() {
             var vm = this;
         }
