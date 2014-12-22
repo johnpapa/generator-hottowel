@@ -1,8 +1,7 @@
 /* jshint -W117, -W030 */
 describe('DashboardController', function() {
     var controller;
-    var people = modkData.getMockPeople();
-    var messageCount = mockData.getMessageCount();
+    var people = mockData.getMockPeople();
 
     beforeEach(function() {
         bard.appModule('app.dashboard');
@@ -11,7 +10,6 @@ describe('DashboardController', function() {
 
     beforeEach(function () {
         sinon.stub(dataservice, 'getPeople').returns($q.when(people));
-        sinon.stub(dataservice, 'getMessageCount').returns($q.when(messageCount));
         controller = $controller('DashboardController');
         $rootScope.$apply();
     });

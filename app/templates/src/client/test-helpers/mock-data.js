@@ -2,7 +2,6 @@
 var mockData = (function() {
     return {
         getMockPeople: getMockPeople,
-        getMockMessageCount: 7,
         getMockStates: getMockStates
     };
 

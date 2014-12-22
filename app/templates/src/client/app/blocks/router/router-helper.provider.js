@@ -1,4 +1,3 @@
-/* Help configure the state-base ui.router */
 (function() {
     'use strict';
 
