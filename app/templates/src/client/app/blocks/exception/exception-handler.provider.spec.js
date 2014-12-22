@@ -37,12 +37,13 @@ describe('blocks.exception', function() {
                 expect(exceptionHandlerProvider).to.be.defined;
             }));
 
-            it('should have exceptionHandlerProvider\'s appErrorPrefix defined', inject(function() {
+            it('should have appErrorPrefix defined', inject(function() {
                 expect(exceptionHandlerProvider.$get().config.appErrorPrefix).to.be.defined;
             }));
 
-            it('should have exceptionHandlerProvider\'s appErrorPrefix set properly', inject(function() {
-                expect(exceptionHandlerProvider.$get().config.appErrorPrefix).to.equal(mocks.prefix);
+            it('should have appErrorPrefix set properly', inject(function() {
+                expect(exceptionHandlerProvider.$get().config.appErrorPrefix)
+                  .to.equal(mocks.prefix);
             }));
 
             it('should throw an error when forced', inject(function() {
