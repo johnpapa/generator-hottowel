@@ -1,18 +1,19 @@
-var gulp = require('gulp');
+var args = require('yargs').argv;
 var browserSync = require('browser-sync');
 var config = require('./gulp.config')();
 var del = require('del');
 var glob = require('glob');
-var _ = require('lodash');
+var gulp = require('gulp');
 var path = require('path');
+var _ = require('lodash');
 var $ = require('gulp-load-plugins')({lazy: true});
 
 var colors = $.util.colors;
-var env = $.util.env;
+var envenv = $.util.env;
 var port = process.env.PORT || config.defaultPort;
 
 /**
- * env variables can be passed in to alter the behavior, when present.
+ * yargs variables can be passed in to alter the behavior, when present.
  * Example: gulp serve-dev
  *
  * --verbose  : Various tasks will produce more output to the console.
@@ -37,7 +38,7 @@ gulp.task('analyze', ['plato'], function() {
 
     return gulp
         .src(config.alljs)
-        .pipe($.if(env.verbose, $.print()))
+        .pipe($.if(args.verbose, $.print()))
         .pipe($.jshint.reporter('jshint-stylish'))
         .pipe($.jscs());
 });
@@ -62,7 +63,7 @@ gulp.task('templatecache', ['clean-code'], function() {
         .src(config.htmltemplates)
         .pipe($.bytediff.start())
         .pipe($.minifyHtml({empty: true}))
-        .pipe($.if(env.verbose, $.bytediff.stop(bytediffFormatter)))
+        .pipe($.if(args.verbose, $.bytediff.stop(bytediffFormatter)))
         .pipe($.angularTemplatecache(config.templateCache.file, {
             module: config.templateCache.module,
             standalone: false,
@@ -79,14 +80,11 @@ gulp.task('wiredep', function() {
     log('Wiring the bower dependencies into the html');
 
     var wiredep = require('wiredep').stream;
+    var options = getWiredepDefaultOptions();
 
     return gulp
         .src(config.index)
-        .pipe(wiredep({
-            bowerJson: require('./bower.json'),
-            directory: config.bower.directory,
-            ignorePath: config.bower.ignorePath
-        }))
+        .pipe(wiredep(options))
         .pipe($.inject(gulp.src(config.js)))
         .pipe(gulp.dest(config.client));
 });
@@ -154,15 +152,12 @@ gulp.task('build-specs', function(done) {
     log('building the spec runner');
 
     var wiredep = require('wiredep').stream;
+    var options = getWiredepDefaultOptions();
+    options.devDependencies = true;
 
     return gulp
         .src(config.specRunner)
-        .pipe(wiredep({
-            bowerJson: require('./bower.json'),
-            directory: config.bower.directory,
-            ignorePath: config.bower.ignorePath,
-            devDependencies: true
-        }))
+        .pipe(wiredep(options))
         .pipe($.inject(gulp.src(config.js)))
         .pipe($.inject(gulp.src(config.testlibraries), {name: 'testlibraries', read: false}))
         .pipe($.inject(gulp.src(config.specHelpers), {name: 'spechelpers', read: false}))
@@ -322,6 +317,33 @@ gulp.task('serve-build', ['build'], function() {
     serve(false /*isDev*/);
 });
 
+/**
+ * Bump the version
+ * --type=pre will bump the prerelease version *.*.*-x
+ * --type=patch or no flag will bump the patch version *.*.x
+ * --type=minor will bump the minor version *.x.*
+ * --type=major will bump the major version x.*.*
+ * --version=1.2.3 will bump to a specific version and ignore other flags
+ */
+gulp.task('bump', function() {
+    var msg = 'Bumping versions';
+    var type = args.type;
+    var version = args.ver;
+    var options = {};
+    if (version) {
+        options.version = version;
+        msg += ' to ' + version;
+    } else {
+        options.type = type;
+        msg += ' for a ' + type;
+    }
+    log(msg);
+    return gulp
+        .src(config.packages)
+        .pipe($.bump(options))
+        .pipe(gulp.dest(config.root));
+});
+
 ////////////////
 
 /**
@@ -360,11 +382,53 @@ function clean(path, done) {
 }
 
 /**
+ * serve the code
+ * --debug-brk or --debug
+ * --nosync
+ * @param  {Boolean} isDev - dev or build mode
+ * @param  {Boolean} specRunner - server spec runner html
+ */
+function serve(isDev, specRunner) {
+    var debug = args.debug || args.debugBrk;
+    var exec;
+    var nodeOptions = {
+        script: config.nodeServer,
+        delayTime: 1,
+        env: {
+            'PORT': port,
+            'NODE_ENV': isDev ? 'dev' : 'build'
+        },
+        watch: [config.server]
+    };
+
+    if (debug) {
+        log('Running node-inspector. Browse to http://localhost:8080/debug?port=5858');
+        exec = require('child_process').exec;
+        exec('node-inspector');
+        nodeOptions.nodeArgs = [debug + '=5858'];
+    }
+
+    addWatchForFileReload(isDev);
+
+    return $.nodemon(nodeOptions)
+        .on('start', function() {
+            startBrowserSync(specRunner);
+        })
+        .on('restart', function() {
+            log('restarted!');
+            setTimeout(function() {
+                browserSync.notify('reloading now ...');
+                browserSync.reload({stream: false});
+            }, config.browserReloadDelay);
+        });
+}
+
+/**
  * Start BrowserSync
  * --nosync will avoid browserSync
  */
 function startBrowserSync(specRunner) {
-    if (env.nosync || browserSync.active) {
+    if (args.nosync || browserSync.active) {
         return;
     }
 
@@ -410,52 +474,11 @@ function startPlatoVisualizer(done) {
 
     function platoCompleted(report) {
         var overview = plato.getOverviewReport(report);
-        if (env.verbose) {
+        if (args.verbose) {
             log(overview.summary);
         }
         if (done) { done(); }
     }
-}
-
-/**
- * serve the build environment
- * --debug-brk or --debug
- * --nosync
- * @param  {Boolean} isDev - dev or build mode
- */
-function serve(isDev, specRunner) {
-    var debug = env.debug || env.debugBrk;
-    var exec;
-    var nodeOptions = {
-        script: config.nodeServer,
-        delayTime: 1,
-        env: {
-            'PORT': port,
-            'NODE_ENV': isDev ? 'dev' : 'build'
-        },
-        watch: [config.server]
-    };
-
-    if (debug) {
-        log('Running node-inspector. Browse to http://localhost:8080/debug?port=5858');
-        exec = require('child_process').exec;
-        exec('node-inspector');
-        nodeOptions.nodeArgs = [debug + '=5858'];
-    }
-
-    addWatchForFileReload(isDev);
-
-    return $.nodemon(nodeOptions)
-        .on('start', function() {
-            startBrowserSync(specRunner);
-        })
-        .on('restart', function() {
-            log('restarted!');
-            setTimeout(function() {
-                browserSync.notify('reloading now ...');
-                browserSync.reload({stream: false});
-            }, config.browserReloadDelay);
-        });
 }
 
 /**
@@ -470,7 +493,7 @@ function startTests(singleRun, done) {
     var fork = require('child_process').fork;
     var karma = require('karma').server;
 
-    if (env.startServers) {
+    if (args.startServers) {
         log('Starting servers');
         var savedEnv = process.env;
         savedEnv.NODE_ENV = 'dev';
@@ -518,6 +541,16 @@ function bytediffFormatter(data) {
 }
 
 /**
+ * Log an error message and emit the end of a task
+ */
+function errorLogger(error) {
+    log('*** Start of Error ***');
+    log(error);
+    log('*** End of Error ***');
+    this.emit('end');
+}
+
+/**
  * Format a number as a percentage
  * @param  {Number} num       Number to format as a percent
  * @param  {Number} precision Precision of the decimal
@@ -548,13 +581,15 @@ function getHeader() {
 }
 
 /**
- * Log an error message and emit the end of a task
+ * Get the default options for wiredep
  */
-function errorLogger(error) {
-    log('*** Start of Error ***');
-    log(error);
-    log('*** End of Error ***');
-    this.emit('end');
+function getWiredepDefaultOptions() {
+    var options = {
+        bowerJson: require('./bower.json'),
+        directory: config.bower.directory,
+        ignorePath: config.bower.ignorePath
+    };
+    return options;
 }
 
 /**
