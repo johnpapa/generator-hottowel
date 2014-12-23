@@ -5,6 +5,7 @@
         .module('app.core')
         .factory('dataservice', dataservice);
 
+    dataservice.$inject = ['$q'];
     /* @ngInject */
     function dataservice($q) {
         var service = {
