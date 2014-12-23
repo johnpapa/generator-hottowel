@@ -146,6 +146,10 @@ The `blocks.router` module contains a routing helper module that assists in addi
 
 ### Testing
 
+- `gulp serve-specs`
+ 
+    Serves and browses to the spec runner html page and runs the unit tests in it. Injects any changes on the fly and re runs the tests. Quick and easy view of tests as an alternative to terminal via `gulp test`.
+
 - `gulp test`
 
     Runs all unit tests using karma runner, mocha, chai and sinon with phantomjs.
