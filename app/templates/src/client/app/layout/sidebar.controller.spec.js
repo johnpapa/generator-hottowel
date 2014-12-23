@@ -8,7 +8,7 @@ describe('layout', function () {
         };
 
         beforeEach(function() {
-            bard.appModule('app.layout');
+            module('app.layout', bard.fakeToastr);
             bard.inject('$controller', '$httpBackend', '$location',
                         '$rootScope', '$state', 'routerHelper');
         });
