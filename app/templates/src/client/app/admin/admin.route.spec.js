@@ -2,24 +2,26 @@
 describe('admin routes', function () {
     describe('state', function () {
         var controller;
+        var view = 'app/admin/admin.html';
 
         beforeEach(function() {
-            module('app', specHelper.fakeLogger);
-            specHelper.injector(function($httpBackend, $location, $rootScope, $state) {});
-            $httpBackend.expectGET('app/admin/admin.html').respond(200);
+            module('app.admin', bard.fakeToastr);
+            bard.inject('$httpBackend', '$location', '$rootScope', '$state', '$templateCache');
         });
 
-        it('should map state admin to url /admin ', function () {
+        beforeEach(function() {
+            $templateCache.put(view, '');
+        });
+
+        it('should map state admin to url /admin ', function() {
             expect($state.href('admin', {})).to.equal('/admin');
         });
 
         it('should map /admin route to admin View template', function () {
-            expect($state.get('admin').templateUrl).
-                to.equal('app/admin/admin.html');
+            expect($state.get('admin').templateUrl).to.equal(view);
         });
 
         it('of admin should work with $state.go', function () {
-            $httpBackend.expectGET('app/dashboard/dashboard.html').respond(200);
             $state.go('admin');
             $rootScope.$apply();
             expect($state.is('admin'));

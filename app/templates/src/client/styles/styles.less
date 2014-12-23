@@ -1,3 +1,10 @@
+@color_lightblue: #52b9e9;
+@color_blue: #1171a3;
+@color_success: #43c83c;
+@color_warning: #f88529;
+@color_important: #fa3031;
+@color_violet: #932ab6;
+
 * {
     /*-webkit-box-shadow: none !important;
     -ms-box-shadow: none !important;
@@ -191,7 +198,7 @@ a.btn {
 /* Button colors */
 
 .btn.btn-primary {
-    background: #1171a3 !important;
+    background: @color_blue !important;
 }
 
     .btn.btn-primary:hover {
@@ -199,7 +206,7 @@ a.btn {
     }
 
 .btn.btn-info {
-    background: #52b9e9 !important;
+    background: @color_lightblue !important;
 }
 
     .btn.btn-info:hover {
@@ -207,7 +214,7 @@ a.btn {
     }
 
 .btn.btn-success {
-    background: #43c83c !important;
+    background: @color_success !important;
 }
 
     .btn.btn-success:hover {
@@ -215,7 +222,7 @@ a.btn {
     }
 
 .btn.btn-warning {
-    background: #f88529 !important;
+    background: @color_warning !important;
 }
 
     .btn.btn-warning:hover {
@@ -223,7 +230,7 @@ a.btn {
     }
 
 .btn.btn-danger {
-    background: #fa3031 !important;
+    background: @color_important !important;
 }
 
     .btn.btn-danger:hover {
@@ -234,59 +241,59 @@ a.btn {
 
 .label.label-success,
 .badge.badge-success {
-    background: #43c83c !important;
+    background: @color_success !important;
 }
 
 .label.label-warning,
 .badge.badge-warning {
-    background: #f88529 !important;
+    background: @color_warning !important;
 }
 
 .label.label-important,
 .badge.badge-important {
-    background: #fa3031 !important;
+    background: @color_important !important;
 }
 
 .label.label-info,
 .badge.badge-info {
-    background: #52b9e9 !important;
+    background: @color_lightblue !important;
 }
 
 /* Background colors */
 
 
 .blightblue {
-    background: #52b9e9 !important;
+    background: @color_lightblue !important;
     color: #fff !important;
     border: 0 !important;
 }
 
 .bblue {
-    background: #1171a3 !important;
+    background: @color_blue !important;
     color: #fff !important;
     border: 0 !important;
 }
 
 .bgreen {
-    background: #43c83c !important;
+    background: @color_success !important;
     color: #fff !important;
     border: 0 !important;
 }
 
 .borange {
-    background: #f88529 !important;
+    background: @color_warning !important;
     color: #fff !important;
     border: 0 !important;
 }
 
 .bred {
-    background: #fa3031 !important;
+    background: @color_important !important;
     color: #fff !important;
     border: 0 !important;
 }
 
 .bviolet {
-    background: #932ab6 !important;
+    background: @color_violet !important;
     color: #fff !important;
     border: 0 !important;
 }
@@ -321,27 +328,27 @@ a.btn {
 /* Text colors */
 
 .lightblue {
-    color: #52b9e9 !important;
+    color: @color_lightblue !important;
 }
 
 .blue {
-    color: #1171a3 !important;
+    color: @color_blue !important;
 }
 
 .green {
-    color: #43c83c !important;
+    color: @color_success !important;
 }
 
 .orange {
-    color: #f88529 !important;
+    color: @color_warning !important;
 }
 
 .red {
-    color: #fa3031 !important;
+    color: @color_important !important;
 }
 
 .violet {
-    color: #932ab6 !important;
+    color: @color_violet !important;
 }
 
 
@@ -400,7 +407,7 @@ form {
     bottom: 0;
     left: 0;
     z-index: 104400;
-    background: #fa3031;
+    background: @color_important;
     display: none;
 }
 
@@ -646,7 +653,7 @@ form {
     .sidebar .navi > li.nlightblue > a:hover,
     .sidebar .navi > li.open.nlightblue > a,
     .sidebar .navi > li.current.nlightblue > a {
-        background: #52b9e9 !important;
+        background: @color_lightblue !important;
         -webkit-transition: background 0.5s ease;
         -moz-transition: background 0.5s ease;
         -o-transition: background 0.5s ease;
@@ -656,7 +663,7 @@ form {
     .sidebar .navi > li.nblue > a:hover,
     .sidebar .navi > li.open.nblue > a,
     .sidebar .navi > li.current.nblue > a {
-        background: #1171a3 !important;
+        background: @color_blue !important;
         -webkit-transition: background 0.5s ease;
         -moz-transition: background 0.5s ease;
         -o-transition: background 0.5s ease;
@@ -666,7 +673,7 @@ form {
     .sidebar .navi > li.ngreen > a:hover,
     .sidebar .navi > li.open.ngreen > a,
     .sidebar .navi > li.current.ngreen > a {
-        background: #43c83c !important;
+        background: @color_success !important;
         -webkit-transition: background 0.5s ease;
         -moz-transition: background 0.5s ease;
         -o-transition: background 0.5s ease;
@@ -676,7 +683,7 @@ form {
     .sidebar .navi > li.norange > a:hover,
     .sidebar .navi > li.open.norange > a,
     .sidebar .navi > li.current.norange > a {
-        background: #f88529 !important;
+        background: @color_warning !important;
         -webkit-transition: background 0.5s ease;
         -moz-transition: background 0.5s ease;
         -o-transition: background 0.5s ease;
@@ -686,7 +693,7 @@ form {
     .sidebar .navi > li.nred > a:hover,
     .sidebar .navi > li.open.nred > a,
     .sidebar .navi > li.current.nred > a {
-        background: #fa3031 !important;
+        background: @color_important !important;
         -webkit-transition: background 0.5s ease;
         -moz-transition: background 0.5s ease;
         -o-transition: background 0.5s ease;
@@ -696,7 +703,7 @@ form {
     .sidebar .navi > li.nviolet > a:hover,
     .sidebar .navi > li.open.nviolet > a,
     .sidebar .navi > li.current.nviolet > a {
-        background: #932ab6 !important;
+        background: @color_violet !important;
         -webkit-transition: background 0.5s ease;
         -moz-transition: background 0.5s ease;
         -o-transition: background 0.5s ease;
@@ -917,38 +924,38 @@ form {
     /* Widget colors */
 
     .widget.wred .widget-head {
-        background-color: #fa3031;
-        border: 1px solid #fa3031;
+        background-color: @color_important;
+        border: 1px solid @color_important;
         color: #fff;
     }
 
     .widget.wlightblue .widget-head {
-        background-color: #52b9e9;
-        border: 1px solid #52b9e9;
+        background-color: @color_lightblue;
+        border: 1px solid @color_lightblue;
         color: #fff;
     }
 
     .widget.wblue .widget-head {
-        background-color: #1171a3;
-        border: 1px solid #1171a3;
+        background-color: @color_blue;
+        border: 1px solid @color_blue;
         color: #fff;
     }
 
     .widget.wgreen .widget-head {
-        background-color: #43c83c;
-        border: 1px solid #43c83c;
+        background-color: @color_success;
+        border: 1px solid @color_success;
         color: #fff;
     }
 
     .widget.worange .widget-head {
-        background-color: #f88529;
-        border: 1px solid #f88529;
+        background-color: @color_warning;
+        border: 1px solid @color_warning;
         color: #fff;
     }
 
     .widget.wviolet .widget-head {
-        background-color: #932ab6;
-        border: 1px solid #932ab6;
+        background-color: @color_violet;
+        border: 1px solid @color_violet;
         color: #fff;
     }
 
@@ -1257,6 +1264,7 @@ form {
     .user img {
         max-width: 70px;
         margin-top: 10px;
+        cursor: pointer;
     }
 
     .user .user-pic {
@@ -1273,6 +1281,7 @@ form {
     }
 
 /* Users ends */
+
 
 /*#endregion */
 
@@ -1299,7 +1308,6 @@ form {
 /*For Bootstrap 3*/
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
-
 body {
     background-color: #FFF;
 }
@@ -1321,7 +1329,7 @@ body {
 }
 
     .sidebar .navi li ul li a:hover {
-        color: #52b9e9;
+        color: @color_lightblue;
     }
 
     .sidebar .navi li ul li a:disabled {
@@ -1357,6 +1365,15 @@ body {
 /*#endregion */
 
 /* #region Main Styles */
+
+ul.image-group {
+  padding:0 0 0 0;
+  margin:0 0 0 0;
+}
+ul.image-group li {
+  list-style:none;
+  margin-bottom:25px;
+}
 
 .ng-cloak {
     display: none !important;
@@ -1438,7 +1455,7 @@ small {
 .widget-content .padd:hover {
     cursor: pointer;
     color: white;
-    background-color: #52b9e9;
+    background-color: @color_lightblue;
 }
 
     .widget-content .padd:hover * {
@@ -1500,12 +1517,13 @@ small {
 }
 
 .navbar .navbar-brand {
-    background: url(../content/images/icon.png) no-repeat left top !important;
+    /*background: url(../images/gg.png) no-repeat left top !important;*/
     margin: 0 1em;
+    height: 45px;
 }
 
 .navbar .brand-title {
-    margin-left: 2em;
+    /*margin-left: 4em;*/
     color: #FFFFFF;
 }
 
@@ -1515,6 +1533,7 @@ small {
 
 .today-datas li {
     padding: 20px 14px;
+    height: 9em;
 }
 
 /*#region Splash */
@@ -1592,6 +1611,53 @@ small {
     margin: 30px 10% !important;
 }
 
+.ngplus-overlay-background {
+    top: 0px;
+    left: 0px;
+    padding-left: 100px;
+    position: absolute;
+    z-index: 10000;
+    height: 100%;
+    width: 100%;
+    background-color: #808080;
+    opacity: 0.2;
+}
+
+.ngplus-overlay-content {
+    position: absolute;
+    /*border: 1px solid #000;*/
+    /*background-color: #fff;*/
+    font-weight: bold;
+    height: 100px;
+    width: 300px;
+    height: 15em;
+    width: 20em;
+    z-index: 10000;
+    text-align: center;
+}
+
+.page-spinner-message {
+    text-align: center;
+    font-size: 400%;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    -webkit-text-shadow: 2px 2px #000000;
+    text-shadow: 2px 2px #000000;
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.15);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #F58A00;
+    padding: 0;
+}
+
+.page-spinner-message.page-spinner-message-subtle {
+    margin: 30% auto 0 auto;
+    font-size: 200%;
+}
+
+.overlay-message {
+    font-size: 200%;
+}
 .spinner {
     margin: 20% auto 0 auto;
     left: auto;
@@ -1601,6 +1667,12 @@ small {
 
 table th > a {
     font-weight: bold;
+}
+
+table th,
+table td {
+    text-align: left;
+    vertical-align: middle;
 }
 
 .table-hover tbody tr:hover > td,
@@ -1618,6 +1690,16 @@ a {
 }
 
 /* #endregion */
+
+
+
+.customer-name {
+    font-size: 1.2em;
+}
+.customer-thumb {
+    margin: 0.1em !important;
+    padding: 0.1em;
+}
 
 /*#region wrapper for angular ng-include and ng-view animations*/
 .view-container {
@@ -1759,6 +1841,12 @@ a {
     }
 }
 
+@media (min-width: 768px) {
+    .sidebar .sidebar-inner {
+        display: block !important;
+    }
+}
+
 @media (max-width: 767px) {
     .sidebar-filler {
         display: none;
@@ -1855,5 +1943,3 @@ a {
 }
 
 /*#endregion */
-
-

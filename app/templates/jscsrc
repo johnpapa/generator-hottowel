@@ -13,11 +13,11 @@
     "requireOperatorBeforeLineBreak": true,
     "requireCamelCaseOrUpperCaseIdentifiers": true,
     "maximumLineLength": {
-      "value": 80,
+      "value": 100,
       "allowComments": true,
       "allowRegex": true
     },
-    "validateIndentation": 2,
+    "validateIndentation": 4,
     "validateQuoteMarks": "'",
 
     "disallowMultipleLineStrings": true,
@@ -60,23 +60,13 @@
 
     "disallowMultipleLineBreaks": true,
 
-    "requireLineFeedAtFileEnd": null,
     "disallowCommaBeforeLineBreak": null,
     "disallowDanglingUnderscores": null,
     "disallowEmptyBlocks": null,
-    "disallowMixedSpacesAndTabs": null,
     "disallowMultipleLineStrings": null,
     "disallowTrailingComma": null,
-    "disallowTrailingWhitespace": null,
-    "maximumLineLength": null,
-    "requireCamelCaseOrUpperCaseIdentifiers": null,
-    "requireCapitalizedConstructors": null,
     "requireCommaBeforeLineBreak": null,
-    "requireCurlyBraces": null,
     "requireDotNotation": null,
     "requireMultipleVarDecl": null,
-    "requireOperatorBeforeLineBreak": null,
-    "requireParenthesesAroundIIFE": true,
-    "validateIndentation": 4,
-    "validateQuoteMarks": null
+    "requireParenthesesAroundIIFE": true
 }

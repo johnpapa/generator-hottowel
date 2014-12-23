@@ -3,20 +3,16 @@ describe('AdminController', function() {
     var controller;
 
     beforeEach(function() {
-        module('app', function($provide) {
-            specHelper.fakeStateProvider($provide);
-            specHelper.fakeLogger($provide);
-        });
-        specHelper.injector(function($controller, $q, $rootScope, dataservice) {});
+        bard.appModule('app.admin');
+        bard.inject('$controller', '$log', '$rootScope');
     });
 
     beforeEach(function () {
-        stubs.dataservice.getPeople($q, dataservice);
-        stubs.dataservice.getMessageCount($q, dataservice);
-
         controller = $controller('AdminController');
         $rootScope.$apply();
     });
+
+    bard.verifyNoOutstandingHttpRequests();
 
     describe('Admin controller', function() {
         it('should be created successfully', function () {
@@ -27,8 +23,10 @@ describe('AdminController', function() {
             it('should have title of Admin', function() {
                 expect(controller.title).to.equal('Admin');
             });
+
+            it('should have logged "Activated"', function() {
+                expect($log.info.logs).to.match(/Activated/);
+            });
         });
     });
-
-    specHelper.verifyNoOutstandingHttpRequests();
 });

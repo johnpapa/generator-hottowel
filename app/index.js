@@ -6,17 +6,17 @@ var generators = yeoman.generators;
 var yosay = require('yosay');
 var chalk = require('chalk');
 
-var HottowelGenerator = generators.Base.extend({
+var HotTowelGenerator = generators.Base.extend({
 
     constructor: function() {
         // arguments and options should be
         // defined in the constructor.
         generators.Base.apply(this, arguments);
-        
+
         this.argument('appName', { type: String, required: false });
         this.appName = this._.camelize(this._.slugify(this._.humanize(this.appName)));
     },
-    
+
     welcome: function() {
         this.log(yosay(
             'Welcome to the HotTowel AngularJS generator!'
@@ -25,10 +25,10 @@ var HottowelGenerator = generators.Base.extend({
 
     prompting: function () {
         // If we passed in the app name, don't prompt the user for it
-        if(this.appName) { 
-            return; 
+        if(this.appName) {
+            return;
         }
-        
+
         var done = this.async();
 
         var prompts = [{
@@ -46,9 +46,9 @@ var HottowelGenerator = generators.Base.extend({
     },
 
     displayName: function() {
-        this.log('Creating ' + this.appName + ' app based on HotTowel.'); 
+        this.log('Creating ' + this.appName + ' app based on HotTowel.');
     },
-                                            
+
     scaffoldFolders: function () {
         this.mkdir('src');
         this.mkdir('src/client');
@@ -60,11 +60,11 @@ var HottowelGenerator = generators.Base.extend({
         var context = {
             appName: this.appName
         };
-        
+
         this.copy('_package.json', 'package.json');
         this.template('_bower.json', 'bower.json');
         this.template('_gulpfile.js', 'gulpfile.js');
-        this.template('_gulp.config.json', 'gulp.config.json');
+        this.template('_gulp.config.js', 'gulp.config.js');
         this.template('_karma.conf.js', 'karma.conf.js');
         this.template('_README.md', 'README.md');
     },
@@ -73,9 +73,14 @@ var HottowelGenerator = generators.Base.extend({
         this.copy('gulp.png', 'gulp.png');
     },
 
+    testRunnerFiles: function () {
+        this.template('src/client/_specs.html', 'src/client/specs.html');
+    },
+
     appFiles: function () {
         this.directory('src/client/app');
-        this.directory('src/client/content');
+        this.directory('src/client/images');
+        this.directory('src/client/styles');
         this.directory('src/client/test-helpers');
 
         this.template('src/client/_index.html', 'src/client/index.html');
@@ -107,4 +112,4 @@ var HottowelGenerator = generators.Base.extend({
     }
 });
 
-module.exports = HottowelGenerator;
+module.exports = HotTowelGenerator;

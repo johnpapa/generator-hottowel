@@ -6,7 +6,6 @@
         .controller('DashboardController', DashboardController);
 
     DashboardController.$inject = ['$q', 'dataservice', 'logger'];
-    
     /* @ngInject */
     function DashboardController($q, dataservice, logger) {
         var vm = this;
