@@ -92,9 +92,17 @@ The app has 4 feature modules and depends on a series of external modules and cu
 
 ```
 app --> [
-        app.admin,
-        app.dashboard,
-        app.layout,
+        app.admin --> [
+            app.core,
+            app.widgets
+        ],
+        app.dashboard --> [
+            app.core,
+            app.widgets
+        ],
+        app.layout --> [
+            app.core
+        ],
         app.widgets,
 		app.core --> [
 			ngAnimate,
@@ -208,7 +216,7 @@ The `blocks.router` module contains a routing helper module that assists in addi
 
 - `gulp wiredep`
 
-    Looks up all bower components' main files and adds them to the `index.html`. 
+    Looks up all bower components' main files and JavaScript source code, then adds them to the `index.html`.    
     
     The `.bowerrc` file also runs this as a postinstall task whenever `bower install` is run.
 
