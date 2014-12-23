@@ -7,11 +7,10 @@ describe('blocks.exception', function() {
     };
 
     beforeEach(function() {
-        module('blocks.exception', function($provide, _exceptionHandlerProvider_) {
+        bard.appModule('blocks.exception', function(_exceptionHandlerProvider_) {
             exceptionHandlerProvider = _exceptionHandlerProvider_;
-            bard.fakeRouteProvider($provide);
         });
-        bard.inject(function($rootScope) {});
+        bard.inject('$rootScope');
     });
 
     bard.verifyNoOutstandingHttpRequests();
@@ -44,7 +43,7 @@ describe('blocks.exception', function() {
 
             it('should have appErrorPrefix set properly', inject(function() {
                 expect(exceptionHandlerProvider.$get().config.appErrorPrefix)
-                  .to.equal(mocks.prefix);
+                    .to.equal(mocks.prefix);
             }));
 
             it('should throw an error when forced', inject(function() {
