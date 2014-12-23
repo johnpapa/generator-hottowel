@@ -276,6 +276,17 @@ The `blocks.router` module contains a routing helper module that assists in addi
 
     Launch debugger and break on 1st line with node-inspector.
 
+### Bumping Versions
+
+- `gulp bump`
+ 
+    Bump the minor version using semver. 
+    --type=patch // default
+    --type=minor
+    --type=major
+    --type=pre
+    --ver=1.2.3 // specific version
+
 ## License
 
 MIT
