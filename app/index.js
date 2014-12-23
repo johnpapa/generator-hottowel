@@ -6,7 +6,7 @@ var generators = yeoman.generators;
 var yosay = require('yosay');
 var chalk = require('chalk');
 
-var HottowelGenerator = generators.Base.extend({
+var HotTowelGenerator = generators.Base.extend({
 
     constructor: function() {
         // arguments and options should be
@@ -73,6 +73,10 @@ var HottowelGenerator = generators.Base.extend({
         this.copy('gulp.png', 'gulp.png');
     },
 
+    testRunnerFiles: function () {
+        this.template('src/client/_specs.html', 'src/client/specs.html');
+    },
+
     appFiles: function () {
         this.directory('src/client/app');
         this.directory('src/client/content');
@@ -107,4 +111,4 @@ var HottowelGenerator = generators.Base.extend({
     }
 });
 
-module.exports = HottowelGenerator;
+module.exports = HotTowelGenerator;
