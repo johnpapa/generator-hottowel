@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
-var config = require('./gulp.config')().getConfig();
+var config = require('./gulp.config')();
 var del = require('del');
 var glob = require('glob');
 var _ = require('lodash');
@@ -29,19 +29,26 @@ gulp.task('help', $.taskListing);
 gulp.task('default', ['help']);
 
 /**
- * Lint the code, create coverage report, and a visualizer
+ * Lint the code and create coverage report
  * @return {Stream}
  */
-gulp.task('analyze', function() {
-    log('Analyzing source with JSHint, JSCS, and Plato');
-
-    startPlatoVisualizer();
+gulp.task('analyze', ['plato'], function() {
+    log('Analyzing source with JSHint and JSCS');
 
     return gulp
         .src(config.alljs)
         .pipe($.if(env.verbose, $.print()))
         .pipe($.jshint.reporter('jshint-stylish'))
         .pipe($.jscs());
+});
+
+/**
+ * Create a visualizer report
+ */
+gulp.task('plato', function(done) {
+    log('Analyzing source with Plato');
+
+    startPlatoVisualizer(done);
 });
 
 /**
@@ -80,6 +87,7 @@ gulp.task('wiredep', function() {
             directory: config.bower.directory,
             ignorePath: config.bower.ignorePath
         }))
+        .pipe($.inject(gulp.src(config.js)))
         .pipe(gulp.dest(config.client));
 });
 
@@ -107,6 +115,11 @@ gulp.task('images', ['clean-images'], function() {
         .pipe(gulp.dest(dest));
 });
 
+//TODO: for testing
+//gulp.task('less', function() {
+//    gulp.watch(config.less, ['styles']);
+//});
+
 /**
  * Compile less to css
  * @return {Stream}
@@ -114,21 +127,13 @@ gulp.task('images', ['clean-images'], function() {
 gulp.task('styles', ['clean-styles'], function() {
     log('Compiling Less --> CSS');
 
-    var stream = gulp
+    return gulp
         .src(config.less)
-        .pipe($.plumber(error))
+        .pipe($.plumber())
         .pipe($.less())
+//        .on('error', errorLogger) // more verbose and dupe output. requires emit.
         .pipe($.autoprefixer('last 2 version', '> 5%'))
-        .pipe(gulp.dest(config.temp))
-        .on('end', function() {
-            log('Compiled Less --> CSS');
-        });
-
-    function error(err) {
-        log('There was an issue compiling Less');
-        log(err);
-        this.emit('end');
-    }
+        .pipe(gulp.dest(config.temp));
 });
 
 /**
@@ -168,9 +173,17 @@ gulp.task('build-specs', function(done) {
 /**
  * Build everything
  */
-gulp.task('build', ['html', 'images', 'fonts'], function(done) {
+gulp.task('build', ['html', 'images', 'fonts'], function() {
     log('Building everything');
-    done();
+
+    var msg = {
+        title: 'gulp build',
+        subtitle: 'Deployed to the build folder',
+        message: 'Running `gulp serve-build`'
+    };
+    del(config.temp);
+    log(msg);
+    notify(msg);
 });
 
 /**
@@ -178,7 +191,7 @@ gulp.task('build', ['html', 'images', 'fonts'], function(done) {
  * and inject them into the new index.html
  * @return {Stream}
  */
-gulp.task('html', ['styles', 'templatecache', 'wiredep'], function(done) {
+gulp.task('html', ['styles', 'templatecache', 'wiredep', 'analyze', 'test'], function() {
     log('Optimizing the js, css, and html');
 
     var assets = $.useref.assets({searchPath: './'});
@@ -189,8 +202,9 @@ gulp.task('html', ['styles', 'templatecache', 'wiredep'], function(done) {
 
     var templateCache = config.temp + config.templateCache.file;
 
-    var stream = gulp
+    return gulp
         .src(config.index)
+        .pipe($.plumber())
         .pipe($.inject(gulp.src(templateCache, {read: false}), {
             starttag: '<!-- inject:templates:js -->'
         }))
@@ -216,26 +230,7 @@ gulp.task('html', ['styles', 'templatecache', 'wiredep'], function(done) {
         .pipe($.useref())
         // Replace the file names in the html with rev numbers
         .pipe($.revReplace())
-        .pipe(gulp.dest(config.build))
-        .on('end', success)
-        .on('error', error);
-
-    function error(err) {
-        log(err);
-        done(err);
-    }
-
-    function success() {
-        var msg = {
-            title: 'gulp html',
-            subtitle: 'Deployed to the build folder',
-            message: 'Run `gulp serve-build`'
-        };
-        del(config.temp);
-        log(msg);
-        notify(msg);
-        done();
-    }
+        .pipe(gulp.dest(config.build));
 });
 
 /**
@@ -285,7 +280,7 @@ gulp.task('clean-code', function(done) {
         config.temp + '**/*.js',
         config.build + 'js/**/*.js',
         config.build + '**/*.html'
-        );
+    );
     clean(files, done);
 });
 
@@ -314,7 +309,7 @@ gulp.task('autotest', function(done) {
  * --debug-brk or --debug
  * --nosync
  */
-gulp.task('serve-dev', ['styles'], function() {
+gulp.task('serve-dev', ['styles', 'wiredep'], function() {
     serve(true /*isDev*/);
 });
 
@@ -323,7 +318,7 @@ gulp.task('serve-dev', ['styles'], function() {
  * --debug-brk or --debug
  * --nosync
  */
-gulp.task('serve-build', function() {
+gulp.task('serve-build', ['build'], function() {
     serve(false /*isDev*/);
 });
 
@@ -398,7 +393,7 @@ function startBrowserSync(specRunner) {
 /**
  * Start Plato inspector and visualizer
  */
-function startPlatoVisualizer() {
+function startPlatoVisualizer(done) {
     log('Running Plato');
 
     var files = glob.sync(config.plato.js);
@@ -418,6 +413,7 @@ function startPlatoVisualizer() {
         if (env.verbose) {
             log(overview.summary);
         }
+        if (done) { done(); }
     }
 }
 
@@ -549,6 +545,16 @@ function getHeader() {
     return $.header(template, {
         pkg: pkg
     });
+}
+
+/**
+ * Log an error message and emit the end of a task
+ */
+function errorLogger(error) {
+    log('*** Start of Error ***');
+    log(error);
+    log('*** End of Error ***');
+    this.emit('end');
 }
 
 /**
