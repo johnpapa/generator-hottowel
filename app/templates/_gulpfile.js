@@ -37,6 +37,7 @@ gulp.task('analyze', ['plato'], function() {
     log('Analyzing source with JSHint and JSCS');
 
     return gulp
+        .src(config.alljs)
         .pipe($.if(args.verbose, $.print()))
         .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish'))
