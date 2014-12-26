@@ -39,7 +39,9 @@ gulp.task('analyze', ['plato'], function() {
     return gulp
         .src(config.alljs)
         .pipe($.if(args.verbose, $.print()))
+        .pipe($.jshint())
         .pipe($.jshint.reporter('jshint-stylish'))
+        .pipe($.jshint.reporter('fail'))
         .pipe($.jscs());
 });
 
