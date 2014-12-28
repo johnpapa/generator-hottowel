@@ -295,7 +295,7 @@ gulp.task('clean-code', function(done) {
  *    gulp test --startServers
  * @return {Stream}
  */
-gulp.task('test', ['analyze'], function(done) {
+gulp.task('test', ['analyze', 'templatecache'], function(done) {
     startTests(true /*singleRun*/ , done);
 });
 
