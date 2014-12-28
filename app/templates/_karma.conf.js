@@ -16,7 +16,8 @@ module.exports = function(config) {
             './src/client/test-helpers/*.js',
             './src/client/app/app.module.js',
             './src/client/app/**/*.module.js',
-            './src/client/app/**/*.js'
+            './src/client/app/**/*.js',
+            './.tmp/templates.js'
         ]),
 
         // list of files to exclude
