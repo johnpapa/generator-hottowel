@@ -15,7 +15,7 @@ describe('layout', function() {
 
         beforeEach(function() {
             routerHelper.configureStates(mockData.getMockStates(), '/');
-            controller = $controller('Sidebar');
+            controller = $controller('SidebarController');
             $rootScope.$apply();
         });
 
