@@ -68,7 +68,7 @@ gulp.task('templatecache', ['clean-code'], function() {
         .pipe($.if(args.verbose, $.bytediff.stop(bytediffFormatter)))
         .pipe($.angularTemplatecache(config.templateCache.file, {
             module: config.templateCache.module,
-            standalone: false,
+            standalone: config.templateCache.standAlone,
             root: config.templateCache.root
         }))
         .pipe(gulp.dest(config.temp));
@@ -154,10 +154,11 @@ gulp.task('serve-specs', ['build-specs'], function(done) {
  * Inject all the spec files into the specs.html
  * @return {Stream}
  */
-gulp.task('build-specs', function(done) {
+gulp.task('build-specs', ['templatecache'], function(done) {
     log('building the spec runner');
 
     var wiredep = require('wiredep').stream;
+    var templateCache = config.temp + config.templateCache.file;
     var options = getWiredepDefaultOptions();
     options.devDependencies = true;
 
@@ -165,9 +166,12 @@ gulp.task('build-specs', function(done) {
         .src(config.specRunner)
         .pipe(wiredep(options))
         .pipe($.inject(gulp.src(config.js)))
-        .pipe($.inject(gulp.src(config.testlibraries), {name: 'testlibraries', read: false}))
-        .pipe($.inject(gulp.src(config.specHelpers), {name: 'spechelpers', read: false}))
-        .pipe($.inject(gulp.src(config.specs), {name: 'specs', read: false}))
+        .pipe($.inject(gulp.src(config.testlibraries), {name: 'inject:testlibraries', read: false}))
+        .pipe($.inject(gulp.src(config.specHelpers), {name: 'inject:spechelpers', read: false}))
+        .pipe($.inject(gulp.src(config.specs), {name: 'inject:specs', read: false}))
+        .pipe($.inject(gulp.src(templateCache, {name: 'inject:templates', read: false}), {
+            starttag: '<!-- inject:templates:js -->'
+        }))
         .pipe(gulp.dest(config.client));
 });
 
@@ -504,7 +508,7 @@ function startTests(singleRun, done) {
         var savedEnv = process.env;
         savedEnv.NODE_ENV = 'dev';
         savedEnv.PORT = 8888;
-        child = fork(config.nodeServer, childProcessCompleted);
+        child = fork(config.nodeServer);
     } else {
         excludeFiles.push(config.midwaySpecs);
     }
@@ -517,16 +521,9 @@ function startTests(singleRun, done) {
 
     ////////////////
 
-    function childProcessCompleted(error, stdout, stderr) {
-        log('stdout: ' + stdout);
-        log('stderr: ' + stderr);
-        if (error !== null) {
-            log('exec error: ' + error);
-        }
-    }
-
     function karmaCompleted() {
         if (child) {
+            log('shutting down the child process');
             child.kill();
         }
         done();

@@ -36,7 +36,7 @@ module.exports = function() {
         specHelpers: [client + '/test-helpers/*.js'],
         specRunner: client + specRunnerFile,
         specRunnerFile: specRunnerFile,
-        midwaySpecs: client + '/test/midway/**/*.spec.js',
+        //midwaySpecs: client + '/test/midway/**/*.spec.js',
         testlibraries: [
             'node_modules/mocha/mocha.js',
             'node_modules/chai/chai.js',
@@ -50,7 +50,8 @@ module.exports = function() {
         templateCache: {
             module: 'app.core',
             file: 'templates.js',
-            root: 'app/'
+            root: 'app/',
+            standAlone: false
         },
         bower: {
             directory: './bower_components/',
