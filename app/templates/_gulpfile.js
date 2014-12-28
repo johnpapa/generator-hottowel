@@ -91,6 +91,15 @@ gulp.task('wiredep', function() {
         .pipe(gulp.dest(config.client));
 });
 
+gulp.task('inject', ['wiredep', 'styles', 'templatecache'], function() {
+    log('Wire up css css into the html, after files are ready');
+
+    return gulp
+        .src(config.index)
+        .pipe($.inject(gulp.src(config.css)))
+        .pipe(gulp.dest(config.client));
+});
+
 /**
  * Copy fonts
  * @return {Stream}
@@ -115,11 +124,6 @@ gulp.task('images', ['clean-images'], function() {
         .pipe(gulp.dest(dest));
 });
 
-//TODO: for testing
-//gulp.task('less', function() {
-//    gulp.watch(config.less, ['styles']);
-//});
-
 /**
  * Compile less to css
  * @return {Stream}
@@ -129,7 +133,7 @@ gulp.task('styles', ['clean-styles'], function() {
 
     return gulp
         .src(config.less)
-        .pipe($.plumber())
+        .pipe($.plumber()) // exit gracefully if something fails after this
         .pipe($.less())
 //        .on('error', errorLogger) // more verbose and dupe output. requires emit.
         .pipe($.autoprefixer('last 2 version', '> 5%'))
@@ -188,7 +192,7 @@ gulp.task('build', ['html', 'images', 'fonts'], function() {
  * and inject them into the new index.html
  * @return {Stream}
  */
-gulp.task('html', ['styles', 'templatecache', 'wiredep', 'analyze', 'test'], function() {
+gulp.task('html', ['test', 'inject'], function() {
     log('Optimizing the js, css, and html');
 
     var assets = $.useref.assets({searchPath: './'});
@@ -287,7 +291,7 @@ gulp.task('clean-code', function(done) {
  *    gulp test --startServers
  * @return {Stream}
  */
-gulp.task('test', function(done) {
+gulp.task('test', ['analyze'], function(done) {
     startTests(true /*singleRun*/ , done);
 });
 
