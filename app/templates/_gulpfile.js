@@ -192,7 +192,7 @@ gulp.task('build', ['html', 'images', 'fonts'], function() {
  * and inject them into the new index.html
  * @return {Stream}
  */
-gulp.task('html', ['styles', 'templatecache', 'wiredep', 'analyze', 'test'], function() {
+gulp.task('html', ['test', 'inject'], function() {
     log('Optimizing the js, css, and html');
 
     var assets = $.useref.assets({searchPath: './'});
