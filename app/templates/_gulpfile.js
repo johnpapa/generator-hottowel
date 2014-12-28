@@ -30,10 +30,10 @@ gulp.task('help', $.taskListing);
 gulp.task('default', ['help']);
 
 /**
- * Lint the code and create coverage report
+ * vet the code and create coverage report
  * @return {Stream}
  */
-gulp.task('analyze', ['plato'], function() {
+gulp.task('vet', function() {
     log('Analyzing source with JSHint and JSCS');
 
     return gulp
@@ -50,6 +50,7 @@ gulp.task('analyze', ['plato'], function() {
  */
 gulp.task('plato', function(done) {
     log('Analyzing source with Plato');
+    log('Browse to /report/plato/index.html to see Plato results');
 
     startPlatoVisualizer(done);
 });
@@ -295,7 +296,7 @@ gulp.task('clean-code', function(done) {
  *    gulp test --startServers
  * @return {Stream}
  */
-gulp.task('test', ['analyze', 'templatecache'], function(done) {
+gulp.task('test', ['vet', 'templatecache'], function(done) {
     startTests(true /*singleRun*/ , done);
 });
 
