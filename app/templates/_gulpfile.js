@@ -124,11 +124,6 @@ gulp.task('images', ['clean-images'], function() {
         .pipe(gulp.dest(dest));
 });
 
-//TODO: for testing
-//gulp.task('less', function() {
-//    gulp.watch(config.less, ['styles']);
-//});
-
 /**
  * Compile less to css
  * @return {Stream}
