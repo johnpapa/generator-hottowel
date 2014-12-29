@@ -35,8 +35,8 @@ gulp.task('bump', function() {
         .pipe($.bump(options))
         .pipe(gulp.dest(config.root));
 });
-////////////////
 
+////////////////
 
 /**
  * Log a message or series of messages using chalk's blue color.

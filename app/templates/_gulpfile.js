@@ -30,17 +30,17 @@ gulp.task('help', $.taskListing);
 gulp.task('default', ['help']);
 
 /**
- * Lint the code and create coverage report
+ * vet the code and create coverage report
  * @return {Stream}
  */
-gulp.task('analyze', ['plato'], function() {
+gulp.task('vet', function() {
     log('Analyzing source with JSHint and JSCS');
 
     return gulp
         .src(config.alljs)
         .pipe($.if(args.verbose, $.print()))
         .pipe($.jshint())
-        .pipe($.jshint.reporter('jshint-stylish'))
+        .pipe($.jshint.reporter('jshint-stylish', {verbose: true}))
         .pipe($.jshint.reporter('fail'))
         .pipe($.jscs());
 });
@@ -50,6 +50,7 @@ gulp.task('analyze', ['plato'], function() {
  */
 gulp.task('plato', function(done) {
     log('Analyzing source with Plato');
+    log('Browse to /report/plato/index.html to see Plato results');
 
     startPlatoVisualizer(done);
 });
@@ -71,7 +72,7 @@ gulp.task('templatecache', ['clean-code'], function() {
             standalone: config.templateCache.standAlone,
             root: config.templateCache.root
         }))
-        .pipe(gulp.dest(config.temp));
+        .pipe(gulp.dest(config.templateCache.path));
 });
 
 /**
@@ -158,7 +159,7 @@ gulp.task('build-specs', ['templatecache'], function(done) {
     log('building the spec runner');
 
     var wiredep = require('wiredep').stream;
-    var templateCache = config.temp + config.templateCache.file;
+    var templateCache = config.templateCache.path + config.templateCache.file;
     var options = getWiredepDefaultOptions();
     options.devDependencies = true;
 
@@ -166,10 +167,14 @@ gulp.task('build-specs', ['templatecache'], function(done) {
         .src(config.specRunner)
         .pipe(wiredep(options))
         .pipe($.inject(gulp.src(config.js)))
-        .pipe($.inject(gulp.src(config.testlibraries), {name: 'inject:testlibraries', read: false}))
-        .pipe($.inject(gulp.src(config.specHelpers), {name: 'inject:spechelpers', read: false}))
-        .pipe($.inject(gulp.src(config.specs), {name: 'inject:specs', read: false}))
-        .pipe($.inject(gulp.src(templateCache, {name: 'inject:templates', read: false}), {
+        .pipe($.inject(gulp.src(config.testlibraries),
+            {name: 'inject:testlibraries', read: false}))
+        .pipe($.inject(gulp.src(config.specHelpers),
+            {name: 'inject:spechelpers', read: false}))
+        .pipe($.inject(gulp.src(config.specs),
+            {name: 'inject:specs', read: false}))
+        .pipe($.inject(gulp.src(templateCache,
+            {name: 'inject:templates', read: false}), {
             starttag: '<!-- inject:templates:js -->'
         }))
         .pipe(gulp.dest(config.client));
@@ -295,7 +300,7 @@ gulp.task('clean-code', function(done) {
  *    gulp test --startServers
  * @return {Stream}
  */
-gulp.task('test', ['analyze'], function(done) {
+gulp.task('test', ['vet', 'templatecache'], function(done) {
     startTests(true /*singleRun*/ , done);
 });
 
@@ -502,6 +507,7 @@ function startTests(singleRun, done) {
     var excludeFiles = [];
     var fork = require('child_process').fork;
     var karma = require('karma').server;
+    var serverSpecs = config.serverIntegrationSpecs;
 
     if (args.startServers) {
         log('Starting servers');
@@ -510,7 +516,10 @@ function startTests(singleRun, done) {
         savedEnv.PORT = 8888;
         child = fork(config.nodeServer);
     } else {
-        excludeFiles.push(config.midwaySpecs);
+        if (serverSpecs && serverSpecs.length) {
+            log('excluding server-integration tests: ' + serverSpecs);
+            excludeFiles = serverSpecs;
+        }
     }
 
     karma.start({
