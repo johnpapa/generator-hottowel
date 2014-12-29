@@ -53,7 +53,7 @@ Create an Angular application using the HotTowel style (via a [Yeoman](http://ye
 ## Running HotTowel
 
 ### Linting
- - Run code analysis using `gulp analyze`. This runs jshint, jscs, and plato.
+ - Run code analysis using `vet analyze`. This runs jshint, jscs, and plato.
 
 ### Tests
  - Run the unit tests using `gulp test` (via karma, mocha, sinon).
@@ -144,13 +144,17 @@ The `blocks.router` module contains a routing helper module that assists in addi
 
 ### Code Analysis
 
-- `gulp analyze`
+- `gulp vet`
 
-    Performs static code analysis on all javascript files. Runs jshint, jscs, and plato.
+    Performs static code analysis on all javascript files. Runs jshint and jscs.
 
-- `gulp analyze --verbose`
+- `gulp vet --verbose`
  
     Displays all files affected and extended information about the code analysis.
+
+- `gulp plato`
+
+    Performs code analysis using plato on all javascript files. Plato generates a report in the reports folder.
 
 ### Testing
 
@@ -160,7 +164,7 @@ The `blocks.router` module contains a routing helper module that assists in addi
 
 - `gulp test`
 
-    Runs all unit tests using karma runner, mocha, chai and sinon with phantomjs.
+    Runs all unit tests using karma runner, mocha, chai and sinon with phantomjs. Depends on vet task, for code analysis.
 
 - `gulp test --startServers`
 
