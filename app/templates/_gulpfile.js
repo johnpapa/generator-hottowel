@@ -72,7 +72,7 @@ gulp.task('templatecache', ['clean-code'], function() {
             standalone: config.templateCache.standAlone,
             root: config.templateCache.root
         }))
-        .pipe(gulp.dest(config.temp));
+        .pipe(gulp.dest(config.templateCache.path));
 });
 
 /**
@@ -159,7 +159,7 @@ gulp.task('build-specs', ['templatecache'], function(done) {
     log('building the spec runner');
 
     var wiredep = require('wiredep').stream;
-    var templateCache = config.temp + config.templateCache.file;
+    var templateCache = config.templateCache.path + config.templateCache.file;
     var options = getWiredepDefaultOptions();
     options.devDependencies = true;
 
@@ -167,10 +167,14 @@ gulp.task('build-specs', ['templatecache'], function(done) {
         .src(config.specRunner)
         .pipe(wiredep(options))
         .pipe($.inject(gulp.src(config.js)))
-        .pipe($.inject(gulp.src(config.testlibraries), {name: 'inject:testlibraries', read: false}))
-        .pipe($.inject(gulp.src(config.specHelpers), {name: 'inject:spechelpers', read: false}))
-        .pipe($.inject(gulp.src(config.specs), {name: 'inject:specs', read: false}))
-        .pipe($.inject(gulp.src(templateCache, {name: 'inject:templates', read: false}), {
+        .pipe($.inject(gulp.src(config.testlibraries),
+            {name: 'inject:testlibraries', read: false}))
+        .pipe($.inject(gulp.src(config.specHelpers),
+            {name: 'inject:spechelpers', read: false}))
+        .pipe($.inject(gulp.src(config.specs),
+            {name: 'inject:specs', read: false}))
+        .pipe($.inject(gulp.src(templateCache,
+            {name: 'inject:templates', read: false}), {
             starttag: '<!-- inject:templates:js -->'
         }))
         .pipe(gulp.dest(config.client));
@@ -503,6 +507,7 @@ function startTests(singleRun, done) {
     var excludeFiles = [];
     var fork = require('child_process').fork;
     var karma = require('karma').server;
+    var serverSpecs = config.serverIntegrationSpecs;
 
     if (args.startServers) {
         log('Starting servers');
@@ -511,7 +516,10 @@ function startTests(singleRun, done) {
         savedEnv.PORT = 8888;
         child = fork(config.nodeServer);
     } else {
-        excludeFiles.push(config.midwaySpecs);
+        if (serverSpecs && serverSpecs.length) {
+            log('excluding server-integration tests: ' + serverSpecs);
+            excludeFiles = serverSpecs;
+        }
     }
 
     karma.start({
