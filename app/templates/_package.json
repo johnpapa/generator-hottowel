@@ -26,6 +26,7 @@
     "gulp": "^3.8.10",
     "gulp-angular-templatecache": "^1.4.2",
     "gulp-autoprefixer": "^1.0.1",
+    "gulp-bump": "^0.1.11",
     "gulp-bytediff": "^0.2.0",
     "gulp-concat": "^2.3.3",
     "gulp-csso": "^0.2.9",
