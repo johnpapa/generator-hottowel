@@ -2,6 +2,7 @@ module.exports = function() {
     var client = './src/client/';
     var server = './src/server/';
     var clientApp = client + 'app/';
+    var report = './report/';
     var root = './';
     var specRunnerFile = 'specs.html';
     var temp = './.tmp/';
@@ -12,35 +13,44 @@ module.exports = function() {
         /**
          * File paths
          */
-        root: root,
+        // all javascript that we want to vet
+        alljs: [
+            './src/**/*.js',
+            './*.js'
+        ],
+        build: './build/',
         client: client,
-        server: server,
-        source: 'src/',
-        htmltemplates: clientApp + '/**/*.html',
         css: temp + '/styles.css',
-        less: client + '/styles/styles.less',
-        html: client + '/**/*.html',
-        index: client + '/index.html',
-
+        fonts: './bower_components/font-awesome/fonts/**/*.*',
+        html: client + '**/*.html',
+        htmltemplates: clientApp + '**/*.html',
+        images: client + 'images/**/*.*',
+        index: client + 'index.html',
         // app js, with no specs
         js: [
             clientApp + '/**/*.module.js',
             clientApp + '/**/*.js',
             '!' + clientApp + '/**/*.spec.js'
         ],
-
-        // all javascript that we want to vet
-        alljs: [
-            './src/**/*.js',
-            './*.js'
-        ],
-
-        plato: {js: clientApp + '/**/*.js'},
-        fonts: './bower_components/font-awesome/fonts/**/*.*',
-        images: client + '/images/**/*.*',
-        build: './build/',
+        less: client + 'styles/styles.less',
+        report: report,
+        root: root,
+        server: server,
+        source: 'src/',
         temp: temp,
-        report: './report/',
+
+        /**
+         * optimized files
+         */
+        optimized: {
+            app: 'app.js',
+            lib: 'lib.js'
+        },
+
+        /**
+         * plato
+         */
+        plato: {js: clientApp + '**/*.js'},
 
         /**
          * browser sync
@@ -48,20 +58,22 @@ module.exports = function() {
         browserReloadDelay: 1000,
 
         /**
-         * Template Cache settings
+         * template cache
          */
         templateCache: {
-            module: 'app.core',
             file: 'templates.js',
-            root: 'app/',
-            standAlone: false,
-            path: temp
+            options: {
+                module: 'app.core',
+                root: 'app/',
+                standAlone: false,
+            }
         },
 
         /**
          * Bower and NPM locations
          */
         bower: {
+            json: require('./bower.json'),
             directory: './bower_components/',
             ignorePath: '../..'
         },
@@ -92,9 +104,9 @@ module.exports = function() {
             'node_modules/mocha-clean/index.js',
             'node_modules/sinon-chai/lib/sinon-chai.js'
         ],
-        specHelpers: [client + '/test-helpers/*.js'],
-        specs: [clientApp + '/**/*.spec.js'],
-        serverIntegrationSpecs: [],
+        specHelpers: [client + 'test-helpers/*.js'],
+        specs: [clientApp + '**/*.spec.js'],
+        serverIntegrationSpecs: [client + '/tests/server-integration/**/*.spec.js'],
 
         /**
          * Node settings
@@ -104,19 +116,48 @@ module.exports = function() {
     };
 
     /**
+     * wiredep and bower settings
+     */
+    config.getWiredepDefaultOptions = function() {
+        var options = {
+            bowerJson: config.bower.json,
+            directory: config.bower.directory,
+            ignorePath: config.bower.ignorePath
+        };
+        return options;
+    };
+
+    /**
      * karma settings
      */
-    config.karma = {
-        files: [].concat(
-            bowerFiles,
-            config.specHelpers,
-            clientApp + '/**/*.module.js',
-            clientApp + '/**/*.js',
-            config.templateCache.path + config.templateCache.file),
-        preprocessors: {}
-    };
-    config.karma.preprocessors['{' + clientApp + ',' +
-                               clientApp + '/**/!(*.spec).js}'] = 'coverage';
+    config.karma = getKarmaOptions();
 
     return config;
-};
+
+    ////////////////
+
+    function getKarmaOptions() {
+        var options = {
+            files: [].concat(
+                bowerFiles,
+                config.specHelpers,
+                clientApp + '**/*.module.js',
+                clientApp + '**/*.js',
+                temp + config.templateCache.file,
+                config.serverIntegrationSpecs
+            ),
+            exclude: [],
+            coverage: {
+                dir: report + 'coverage',
+                reporters: [
+                    // reporters not supporting the `file` property
+                    {type: 'html', subdir: 'report-html'},
+                    {type: 'lcov', subdir: 'report-lcov'},
+                    {type: 'text-summary'} //, subdir: '.', file: 'text-summary.txt'}
+                ]
+            },
+            preprocessors: {}
+        };
+        options.preprocessors[clientApp + '**/!(*.spec)+(.js)'] = ['coverage'];
+        return options;
+    }};

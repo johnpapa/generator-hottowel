@@ -13,7 +13,7 @@ module.exports = function(config) {
         files: gulpConfig.karma.files,
 
         // list of files to exclude
-        exclude: [],
+        exclude: gulpConfig.karma.exclude,
 
         proxies: {
             '/': 'http://localhost:8888/'
@@ -29,8 +29,8 @@ module.exports = function(config) {
         reporters: ['progress', 'coverage'],
 
         coverageReporter: {
-            type: 'lcov',
-            dir: 'report/coverage'
+            dir: gulpConfig.karma.coverage.dir,
+            reporters: gulpConfig.karma.coverage.reporters
         },
 
         // web server port
