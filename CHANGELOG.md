@@ -1,5 +1,20 @@
 #generator-hottowel
 
+## 0.2.0 - Karmagulpulous Unification
+
+### Features
+
+- abstracted more of `karma.conf.js` out to `gulp.config.js` 
+- added `gulp-bump` and a related task
+- a ton of refactoring to make the `gulp.config.js` more readable
+- added nodemon logging
+- exporting gulp as a proper module
+- refactored testing to be cleaner
+
+### Bug Fixes
+
+- fixed bug that prevented karma from completing properly
+
 ## 0.0.12 - Gulp Craziness
 
 ### Features
