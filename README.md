@@ -82,7 +82,7 @@ The structure also contains a gulpfile.js and a server folder. The server is the
 			/content
 	
 ### Installing Packages
-When you generate the project it should run these commands, but if you notice missing pavkages, run these again:
+When you generate the project it should run these commands, but if you notice missing packages, run these again:
 
  - `npm install`
  - `bower install`
