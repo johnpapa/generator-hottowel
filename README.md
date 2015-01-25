@@ -1,4 +1,7 @@
-# generator-hottowel [![Build Status](https://secure.travis-ci.org/johnpapa/generator-hottowel.png?branch=master)](https://travis-ci.org/johnpapa/generator-hottowel)
+# generator-hottowel 
+
+[![NPM version](https://img.shields.io/npm/v/generator-hottowel.svg?style=flat)](https://www.npmjs.com/package/generator-hottowel)
+[![Build Status](https://secure.travis-ci.org/johnpapa/generator-hottowel.png?branch=master)](https://travis-ci.org/johnpapa/generator-hottowel)
 
 Create an Angular application using the HotTowel style (via a [Yeoman](http://yeoman.io) generator)
 
