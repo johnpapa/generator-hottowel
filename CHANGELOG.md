@@ -1,5 +1,17 @@
 #generator-hottowel
 
+## 0.2.1 - Inpsectuous Actualization
+
+### Features
+
+- added changelog
+- extracted function for setting up node options
+- extracted function for run node-inspector
+
+### Bug Fixes
+
+- fixed bug that prevented node-inspector from working
+
 ## 0.2.0 - Karmagulpulous Unification
 
 ### Features
