@@ -1,5 +1,21 @@
 #generator-hottowel
 
+## 0.2.1 - Inpsectuous Injectulous 404zation
+
+### Features
+
+- added changelog
+- extracted function for setting up node options
+- extracted function for run node-inspector
+- added 404 page inside the angular app in the core module
+- otherwise route goes to 404 template
+- node server routes template calls while unknown pages go to index.html
+
+### Bug Fixes
+
+- fixed bug that prevented node-inspector from working
+- fixed bug that prevented html injection in the index.html
+
 ## 0.2.0 - Karmagulpulous Unification
 
 ### Features
