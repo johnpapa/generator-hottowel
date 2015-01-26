@@ -62,9 +62,9 @@ Create an Angular application using the HotTowel style (via a [Yeoman](http://ye
  - Run the unit tests using `gulp test` (via karma, mocha, sinon).
 
 ### Running in dev mode
- - Run the project with `gulp serve-dev --sync`
+ - Run the project with `gulp serve-dev`
 
- - `--sync` opens it in a browser and updates the browser with any files changes.
+ - opens it in a browser and updates the browser with any files changes.
 
 ### Building the project
  - Build the optimized project using `gulp build`
