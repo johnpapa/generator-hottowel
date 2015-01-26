@@ -398,22 +398,16 @@ function clean(path, done) {
  */
 function serve(isDev, specRunner) {
     var debug = args.debug || args.debugBrk;
-    var exec;
-    var nodeOptions = {
-        script: config.nodeServer,
-        delayTime: 1,
-        env: {
-            'PORT': port,
-            'NODE_ENV': isDev ? 'dev' : 'build'
-        },
-        watch: [config.server]
-    };
+    var debugMode = args.debug ? '--debug' : args.debugBrk ? '--debug-brk' : '';
+    var nodeOptions = getNodeOptions(isDev);
 
     if (debug) {
-        log('Running node-inspector. Browse to http://localhost:8080/debug?port=5858');
-        exec = require('child_process').exec;
-        exec('node-inspector');
-        nodeOptions.nodeArgs = [debug + '=5858'];
+        runNodeInspector();
+        nodeOptions.nodeArgs = [debugMode + '=5858'];
+    }
+
+    if (args.verbose) {
+        console.log(nodeOptions);
     }
 
     return $.nodemon(nodeOptions)
@@ -435,6 +429,25 @@ function serve(isDev, specRunner) {
         .on('exit', function () {
             log('*** nodemon exited cleanly');
         });
+}
+
+function getNodeOptions(isDev) {
+    return {
+        script: config.nodeServer,
+        delayTime: 1,
+        env: {
+            'PORT': port,
+            'NODE_ENV': isDev ? 'dev' : 'build'
+        },
+        watch: [config.server]
+    };
+}
+
+function runNodeInspector() {
+    log('Running node-inspector.');
+    log('Browse to http://localhost:8080/debug?port=5858');
+    var exec = require('child_process').exec;
+    exec('node-inspector');
 }
 
 /**
