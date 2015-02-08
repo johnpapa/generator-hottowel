@@ -1,5 +1,16 @@
 #generator-hottowel
 
+## 0.2.2 - Sequential Stubranium
+
+### Features
+
+- added support for stubbing data from http calls
+- injected files are now sorted using gulp-order
+
+### Bug Fixes
+
+- none
+
 ## 0.2.1 - Inpsectuous Injectulous 404zation
 
 ### Features
