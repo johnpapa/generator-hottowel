@@ -42,6 +42,7 @@
     "gulp-minify-html": "^0.1.7",
     "gulp-ng-annotate": "^0.3.2",
     "gulp-nodemon": "^1.0.4",
+    "gulp-order": "^1.1.1",
     "gulp-plumber": "^0.6.6",
     "gulp-print": "^1.1.0",
     "gulp-rev": "^1.1.0",
