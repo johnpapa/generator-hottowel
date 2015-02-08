@@ -66,6 +66,7 @@ gulp.task('styles', ['clean-styles'], function() {
         .src(config.less)
         .pipe($.plumber()) // exit gracefully if something fails after this
         .pipe($.less())
+//        .on('error', errorLogger) // more verbose and dupe output. requires emit.
         .pipe($.autoprefixer({browsers: ['last 2 version', '> 5%']}))
         .pipe(gulp.dest(config.temp));
 });
@@ -128,10 +129,13 @@ gulp.task('wiredep', function() {
     var wiredep = require('wiredep').stream;
     var options = config.getWiredepDefaultOptions();
 
+    // Only include stubs if flag is enabled
+    var js = args.stubs ? [].concat(config.js, config.stubsjs) : config.js;
+
     return gulp
         .src(config.index)
         .pipe(wiredep(options))
-        .pipe($.inject(gulp.src(config.js)))
+        .pipe(inject(js, '', config.jsOrder))
         .pipe(gulp.dest(config.client));
 });
 
@@ -140,7 +144,7 @@ gulp.task('inject', ['wiredep', 'styles', 'templatecache'], function() {
 
     return gulp
         .src(config.index)
-        .pipe($.inject(gulp.src(config.css)))
+        .pipe(inject(config.css))
         .pipe(gulp.dest(config.client));
 });
 
@@ -174,15 +178,11 @@ gulp.task('build-specs', ['templatecache'], function(done) {
     return gulp
         .src(config.specRunner)
         .pipe(wiredep(options))
-        .pipe($.inject(gulp.src(config.js)))
-        .pipe($.inject(gulp.src(config.testlibraries),
-            {name: 'inject:testlibraries', read: false}))
-        .pipe($.inject(gulp.src(config.specHelpers),
-            {name: 'inject:spechelpers', read: false}))
-        .pipe($.inject(gulp.src(specs),
-            {name: 'inject:specs', read: false}))
-        .pipe($.inject(gulp.src(templateCache),
-            {name: 'inject:templates', read: false}))
+        .pipe(inject(config.js, '', config.jsOrder))
+        .pipe(inject(config.testlibraries, 'testlibraries'))
+        .pipe(inject(config.specHelpers, 'spechelpers'))
+        .pipe(inject(specs, 'specs'))
+        .pipe(inject(templateCache, 'templates'))
         .pipe(gulp.dest(config.client));
 });
 
@@ -223,8 +223,7 @@ gulp.task('optimize', ['inject', 'test'], function() {
     return gulp
         .src(config.index)
         .pipe($.plumber())
-        .pipe($.inject(gulp.src(templateCache),
-            {name: 'inject:templates', read: false}))
+        .pipe(inject(templateCache, 'templates'))
         .pipe(assets) // Gather all assets from the html with useref
         // Get the css
         .pipe(cssFilter)
@@ -387,6 +386,35 @@ function changeEvent(event) {
 function clean(path, done) {
     log('Cleaning: ' + $.util.colors.blue(path));
     del(path, done);
+}
+
+/**
+ * Inject files in a sorted sequence at a specified inject label
+ * @param   {Array} src   glob pattern for source files
+ * @param   {String} label   The label name
+ * @param   {Array} order   glob pattern for sort order of the files
+ * @returns {Stream}   The stream
+ */
+function inject(src, label, order) {
+    var options = {read: false};
+    if (label) {
+        options.name = 'inject:' + label;
+    }
+
+    return $.inject(orderSrc(src, order), options);
+}
+
+/**
+ * Order a stream
+ * @param   {Stream} src   The gulp.src stream
+ * @param   {Array} order Glob array pattern
+ * @returns {Stream} The ordered stream
+ */
+function orderSrc (src, order) {
+    order = order || ['**/*'];
+    return gulp
+        .src(src)
+        .pipe($.order(order));
 }
 
 /**

@@ -7,6 +7,11 @@ module.exports = function() {
     var specRunnerFile = 'specs.html';
     var temp = './.tmp/';
     var wiredep = require('wiredep');
+    var bower = {
+        json: require('./bower.json'),
+        directory: './bower_components/',
+        ignorePath: '../..'
+    };
     var bowerFiles = wiredep({devDependencies: true})['js'];
 
     var config = {
@@ -21,7 +26,7 @@ module.exports = function() {
         build: './build/',
         client: client,
         css: temp + '/styles.css',
-        fonts: './bower_components/font-awesome/fonts/**/*.*',
+        fonts: bower + 'font-awesome/fonts/**/*.*',
         html: client + '**/*.html',
         htmltemplates: clientApp + '**/*.html',
         images: client + 'images/**/*.*',
@@ -32,11 +37,20 @@ module.exports = function() {
             clientApp + '/**/*.js',
             '!' + clientApp + '/**/*.spec.js'
         ],
+        jsOrder: [
+            '**/app.module.js',
+            '**/*.module.js',
+            '**/*.js'
+        ],
         less: client + 'styles/styles.less',
         report: report,
         root: root,
         server: server,
         source: 'src/',
+        stubsjs: [
+            bower.directory + 'angular-mocks/angular-mocks.js',
+            client + 'stubs/**/*.js'
+        ],
         temp: temp,
 
         /**
@@ -72,11 +86,7 @@ module.exports = function() {
         /**
          * Bower and NPM locations
          */
-        bower: {
-            json: require('./bower.json'),
-            directory: './bower_components/',
-            ignorePath: '../..'
-        },
+        bower: bower,
         packages: [
             './package.json',
             './bower.json'
