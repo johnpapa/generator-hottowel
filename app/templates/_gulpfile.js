@@ -181,7 +181,7 @@ gulp.task('build-specs', ['templatecache'], function(done) {
         .pipe(inject(config.js, '', config.jsOrder))
         .pipe(inject(config.testlibraries, 'testlibraries'))
         .pipe(inject(config.specHelpers, 'spechelpers'))
-        .pipe(inject(specs, 'specs'))
+        .pipe(inject(specs, 'specs', ['**/*']))
         .pipe(inject(templateCache, 'templates'))
         .pipe(gulp.dest(config.client));
 });
@@ -411,10 +411,10 @@ function inject(src, label, order) {
  * @returns {Stream} The ordered stream
  */
 function orderSrc (src, order) {
-    order = order || ['**/*'];
+    //order = order || ['**/*'];
     return gulp
         .src(src)
-        .pipe($.order(order));
+        .pipe($.if(order, $.order(order)));
 }
 
 /**

@@ -1,5 +1,11 @@
 #generator-hottowel
 
+## 0.2.3 - Sequential Bellaspectral
+
+### Features
+
+- fixed sorting for the specs
+
 ## 0.2.2 - Sequential Stubranium
 
 ### Features
