@@ -1,5 +1,15 @@
 #generator-hottowel
 
+## 0.2.4 - Spatial Whiteness
+
+### Features
+none
+
+### Bug Fixes
+
+- Removed whitespace in HTML files causing extra spacing for injection
+- Removed comma in JSON in gulp.config.js
+
 ## 0.2.3 - Sequential Bellaspectral
 
 ### Features
