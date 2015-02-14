@@ -1,5 +1,15 @@
 #generator-hottowel
 
+## 0.2.5 - Path Clarity
+
+### Features
+- Clarified paths in gulp.config.js for node_modules
+- Added .idea to .gitignore
+
+### Bug Fixes
+
+- Fixed font awesome path to use bower folder
+
 ## 0.2.4 - Spatial Whiteness
 
 ### Features

@@ -7,12 +7,13 @@ module.exports = function() {
     var specRunnerFile = 'specs.html';
     var temp = './.tmp/';
     var wiredep = require('wiredep');
+    var bowerFiles = wiredep({devDependencies: true})['js'];
     var bower = {
         json: require('./bower.json'),
         directory: './bower_components/',
         ignorePath: '../..'
     };
-    var bowerFiles = wiredep({devDependencies: true})['js'];
+    var nodeModules = 'node_modules';
 
     var config = {
         /**
@@ -25,17 +26,17 @@ module.exports = function() {
         ],
         build: './build/',
         client: client,
-        css: temp + '/styles.css',
-        fonts: bower + 'font-awesome/fonts/**/*.*',
+        css: temp + 'styles.css',
+        fonts: bower.directory + 'font-awesome/fonts/**/*.*',
         html: client + '**/*.html',
         htmltemplates: clientApp + '**/*.html',
         images: client + 'images/**/*.*',
         index: client + 'index.html',
         // app js, with no specs
         js: [
-            clientApp + '/**/*.module.js',
-            clientApp + '/**/*.js',
-            '!' + clientApp + '/**/*.spec.js'
+            clientApp + '**/*.module.js',
+            clientApp + '**/*.js',
+            '!' + clientApp + '**/*.spec.js'
         ],
         jsOrder: [
             '**/app.module.js',
@@ -84,7 +85,7 @@ module.exports = function() {
         },
 
         /**
-         * Bower and NPM locations
+         * Bower and NPM files
          */
         bower: bower,
         packages: [
@@ -109,10 +110,10 @@ module.exports = function() {
          *  6 templates
          */
         testlibraries: [
-            'node_modules/mocha/mocha.js',
-            'node_modules/chai/chai.js',
-            'node_modules/mocha-clean/index.js',
-            'node_modules/sinon-chai/lib/sinon-chai.js'
+            nodeModules + '/mocha/mocha.js',
+            nodeModules + '/chai/chai.js',
+            nodeModules + '/mocha-clean/index.js',
+            nodeModules + '/sinon-chai/lib/sinon-chai.js'
         ],
         specHelpers: [client + 'test-helpers/*.js'],
         specs: [clientApp + '**/*.spec.js'],
@@ -170,4 +171,5 @@ module.exports = function() {
         };
         options.preprocessors[clientApp + '**/!(*.spec)+(.js)'] = ['coverage'];
         return options;
-    }};
+    }
+};
