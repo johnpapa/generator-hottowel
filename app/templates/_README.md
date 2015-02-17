@@ -25,7 +25,7 @@
 ## Running HotTowel
 
 ### Linting
- - Run code analysis using `gulp analyze`. This runs jshint, jscs, and plato.
+ - Run code analysis using `gulp vet`. This runs jshint, jscs, and plato.
 
 ### Tests
  - Run the unit tests using `gulp test` (via karma, mocha, sinon).
