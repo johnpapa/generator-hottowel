@@ -1,6 +1,4 @@
 module.exports = function (app) {
-    var api = '/api/';
-
     var service = {
         notFoundMiddleware: notFoundMiddleware,
         send404: send404
