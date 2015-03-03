@@ -5,9 +5,9 @@
         .module('app.core')
         .factory('dataservice', dataservice);
 
-    dataservice.$inject = ['$q'];
+    dataservice.$inject = ['$http', '$q', 'logger'];
     /* @ngInject */
-    function dataservice($q) {
+    function dataservice($http, $q, logger) {
         var service = {
             getPeople: getPeople,
             getMessageCount: getMessageCount
@@ -18,16 +18,19 @@
         function getMessageCount() { return $q.when(72); }
 
         function getPeople() {
-            var people = [
-                {firstName: 'John', lastName: 'Papa', age: 25, location: 'Florida'},
-                {firstName: 'Ward', lastName: 'Bell', age: 31, location: 'California'},
-                {firstName: 'Colleen', lastName: 'Jones', age: 21, location: 'New York'},
-                {firstName: 'Madelyn', lastName: 'Green', age: 18, location: 'North Dakota'},
-                {firstName: 'Ella', lastName: 'Jobs', age: 18, location: 'South Dakota'},
-                {firstName: 'Landon', lastName: 'Gates', age: 11, location: 'South Carolina'},
-                {firstName: 'Haley', lastName: 'Guthrie', age: 35, location: 'Wyoming'}
-            ];
-            return $q.when(people);
+            return $http.get('/api/people')
+                .then(success)
+                .catch(fail);
+
+            function success(response) {
+                return response.data;
+            }
+
+            function fail(error) {
+                var msg = 'query for people failed. ' + error.data.description;
+                logger.error(msg);
+                return $q.reject(msg);
+            }
         }
     }
 })();

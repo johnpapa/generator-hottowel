@@ -5,13 +5,13 @@
         .module('app.layout')
         .controller('ShellController', ShellController);
 
-    ShellController.$inject = ['$timeout', 'config', 'logger'];
+    ShellController.$inject = ['$rootScope', '$timeout', 'config', 'logger'];
     /* @ngInject */
-    function ShellController($timeout, config, logger) {
+    function ShellController($rootScope, $timeout, config, logger) {
         var vm = this;
         vm.busyMessage = 'Please wait ...';
         vm.isBusy = true;
-        vm.showSplash = true;
+        $rootScope.showSplash = true;
         vm.navline = {
             title: config.appTitle,
             text: 'Created by John Papa',
@@ -28,7 +28,7 @@
         function hideSplash() {
             //Force a 1 second delay so we can see the splash.
             $timeout(function() {
-                vm.showSplash = false;
+                $rootScope.showSplash = false;
             }, 1000);
         }
     }

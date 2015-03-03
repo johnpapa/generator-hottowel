@@ -86,6 +86,8 @@ var HotTowelGenerator = generators.Base.extend({
         this.template('src/client/_index.html', 'src/client/index.html');
 
         this.template('src/server/_app.js', 'src/server/app.js');
+        this.template('src/server/_data.js', 'src/server/data.js');
+        this.template('src/server/_routes.js', 'src/server/routes.js');
         this.directory('src/server/utils');
         this.copy('src/server/favicon.ico');
     },
