@@ -39,7 +39,7 @@
     "laxbreak": false,
     "laxcomma": false,
     "loopfunc": true,
-    "maxerr": false,
+    "maxerr": 50,
     "moz": false,
     "multistr": false,
     "notypeof": false,
