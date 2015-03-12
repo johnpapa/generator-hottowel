@@ -1,5 +1,14 @@
 #generator-hottowel
 
+## 0.2.9 - Correctorus Maximus Erronoeous
+
+### Features
+- None
+
+### Bug Fixes
+
+- Fixed jshintrc maxerr to 50
+
 ## 0.2.5 - Path Clarity
 
 ### Features
