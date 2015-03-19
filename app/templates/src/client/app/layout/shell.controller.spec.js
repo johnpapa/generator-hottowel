@@ -20,12 +20,12 @@ describe('ShellController', function() {
         });
 
         it('should show splash screen', function () {
-            expect(controller.showSplash).to.be.true;
+            expect($rootScope.showSplash).to.be.true;
         });
 
         it('should hide splash screen after timeout', function (done) {
             $timeout(function() {
-                expect(controller.showSplash).to.be.false;
+                expect($rootScope.showSplash).to.be.false;
                 done();
             }, 1000);
             $timeout.flush();
