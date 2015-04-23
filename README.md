@@ -5,9 +5,9 @@
 
 Create an Angular application using the HotTowel style (via a [Yeoman](http://yeoman.io) generator)
 
->*Opinionated AngularJS style guide for teams by [@john_papa](//twitter.com/john_papa)*
+>*Opinionated Angular style guide for teams by [@john_papa](//twitter.com/john_papa)*
 
->More details about the styles and patterns used in this app can be found in my [AngularJS Style Guide](https://github.com/johnpapa/angularjs-styleguide) and my [AngularJS Patterns: Clean Code](http://jpapa.me/ngclean) course at [Pluralsight](http://pluralsight.com/training/Authors/Details/john-papa) and working in teams. 
+>More details about the styles and patterns used in this app can be found in my [Angular Style Guide](https://github.com/johnpapa/angularjs-styleguide) and my [Angular Patterns: Clean Code](http://jpapa.me/ngclean) course at [Pluralsight](http://pluralsight.com/training/Authors/Details/john-papa) and working in teams. 
 
 
 ## Prerequisites
@@ -56,7 +56,7 @@ Create an Angular application using the HotTowel style (via a [Yeoman](http://ye
 ## Running HotTowel
 
 ### Linting
- - Run code analysis using `vet analyze`. This runs jshint, jscs, and plato.
+ - Run code analysis using `gulp vet`. This runs jshint, jscs, and plato.
 
 ### Tests
  - Run the unit tests using `gulp test` (via karma, mocha, sinon).
