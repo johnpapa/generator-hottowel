@@ -97,6 +97,7 @@ var HotTowelGenerator = generators.Base.extend({
         this.copy('jshintrc', '.jshintrc');
         this.copy('jscsrc', '.jscsrc');
         this.copy('bowerrc', '.bowerrc');
+        this.copy('gitignore', '.gitignore');
     },
 
     runNpm: function () {
