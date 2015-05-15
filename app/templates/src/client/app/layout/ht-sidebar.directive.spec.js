@@ -22,10 +22,10 @@ describe('htSidebar directive: ', function () {
         // N.B.: We do NOT add this element to the browser DOM (although we could).
         //       spec runs faster if we don't touch the DOM (even the PhantomJS DOM).
         el = angular.element(
-            '<ht-sidebar when-done-animating="vm.sidebarReady(42)" > \
-                <div class="sidebar-dropdown"><a href="">Menu</a></div> \
-                <div class="sidebar-inner" style="display: none"></div> \
-            </ht-sidebar>');
+            '<ht-sidebar when-done-animating="vm.sidebarReady(42)">' +
+                '<div class="sidebar-dropdown"><a href="">Menu</a></div>' +
+                '<div class="sidebar-inner" style="display: none"></div>' +
+            '</ht-sidebar>');
 
         // The spec examines changes to these template parts
         dropdownElement = el.find('.sidebar-dropdown a'); // the link to click
