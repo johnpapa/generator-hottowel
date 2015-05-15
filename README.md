@@ -1,4 +1,4 @@
-# generator-hottowel 
+# generator-hottowel
 
 [![NPM version](https://img.shields.io/npm/v/generator-hottowel.svg?style=flat)](https://www.npmjs.com/package/generator-hottowel)
 [![Build Status](https://secure.travis-ci.org/johnpapa/generator-hottowel.png?branch=master)](https://travis-ci.org/johnpapa/generator-hottowel)
@@ -7,12 +7,11 @@ Create an Angular application using the HotTowel style (via a [Yeoman](http://ye
 
 >*Opinionated Angular style guide for teams by [@john_papa](//twitter.com/john_papa)*
 
->More details about the styles and patterns used in this app can be found in my [Angular Style Guide](https://github.com/johnpapa/angularjs-styleguide) and my [Angular Patterns: Clean Code](http://jpapa.me/ngclean) course at [Pluralsight](http://pluralsight.com/training/Authors/Details/john-papa) and working in teams. 
-
+>More details about the styles and patterns used in this app can be found in my [Angular Style Guide](https://github.com/johnpapa/angularjs-styleguide) and my [Angular Patterns: Clean Code](http://jpapa.me/ngclean) course at [Pluralsight](http://pluralsight.com/training/Authors/Details/john-papa) and working in teams.
 
 ## Prerequisites
 
-1. Install [Node.js](http://nodejs.org) 
+1. Install [Node.js](http://nodejs.org)
  - on OSX use [homebrew](http://brew.sh) `brew install node`
  - on Windows use [chocolatey](https://chocolatey.org/) `choco install nodejs`
 
@@ -28,7 +27,7 @@ Create an Angular application using the HotTowel style (via a [Yeoman](http://ye
 
 ## QuickStart
 
-1. Install generator-hottowel 
+1. Install generator-hottowel
     ```bash
     npm install -g generator-hottowel
     ```
@@ -83,7 +82,7 @@ The structure also contains a gulpfile.js and a server folder. The server is the
 		/client
 			/app
 			/content
-	
+
 ### Installing Packages
 When you generate the project it should run these commands, but if you notice missing packages, run these again:
 
@@ -121,7 +120,7 @@ app --> [
 #### core Module
 Core modules are ones that are shared throughout the entire application and may be customized for the specific application. Example might be common data services.
 
-This is an aggregator of modules that the application will need. The `core` module takes the blocks, common, and Angular sub-modules as dependencies. 
+This is an aggregator of modules that the application will need. The `core` module takes the blocks, common, and Angular sub-modules as dependencies.
 
 #### blocks Modules
 Block modules are reusable blocks of code that can be used across projects simply by including them as dependencies.
@@ -152,7 +151,7 @@ The `blocks.router` module contains a routing helper module that assists in addi
     Performs static code analysis on all javascript files. Runs jshint and jscs.
 
 - `gulp vet --verbose`
- 
+
     Displays all files affected and extended information about the code analysis.
 
 - `gulp plato`
@@ -162,7 +161,7 @@ The `blocks.router` module contains a routing helper module that assists in addi
 ### Testing
 
 - `gulp serve-specs`
- 
+
     Serves and browses to the spec runner html page and runs the unit tests in it. Injects any changes on the fly and re runs the tests. Quick and easy view of tests as an alternative to terminal via `gulp test`.
 
 - `gulp test`
@@ -206,7 +205,7 @@ The `blocks.router` module contains a routing helper module that assists in addi
 ### Fonts and Images
 
 - `gulp fonts`
- 
+
     Copy all fonts from source to the build folder
 
 - `gulp images`
@@ -223,14 +222,14 @@ The `blocks.router` module contains a routing helper module that assists in addi
 
 - `gulp wiredep`
 
-    Looks up all bower components' main files and JavaScript source code, then adds them to the `index.html`.    
-    
+    Looks up all bower components' main files and JavaScript source code, then adds them to the `index.html`.
+
     The `.bowerrc` file also runs this as a postinstall task whenever `bower install` is run.
 
 ### Angular HTML Templates
 
 - `gulp templatecache`
- 
+
     Create an Angular module that adds all HTML templates to Angular's $templateCache. This pre-fetches all HTML templates saving XHR calls for the HTML.
 
 - `gulp templatecache --verbose`
@@ -240,25 +239,25 @@ The `blocks.router` module contains a routing helper module that assists in addi
 ### Serving Development Code
 
 - `gulp serve-dev`
- 
-    Serves the development code and launches it in a browser. The goal of building for development is to do it as fast as possible, to keep development moving efficiently. This task serves all code from the source folders and compiles less to css in a temp folder. 
-    
+
+    Serves the development code and launches it in a browser. The goal of building for development is to do it as fast as possible, to keep development moving efficiently. This task serves all code from the source folders and compiles less to css in a temp folder.
+
 - `gulp serve-dev --nosync`
- 
+
     Serves the development code without launching the browser.
 
 - `gulp serve-dev --debug`
- 
+
     Launch debugger with node-inspector.
-    
+
 - `gulp serve-dev --debug-brk`
- 
+
     Launch debugger and break on 1st line with node-inspector.
 
 ### Building Production Code
 
 - `gulp html`
- 
+
     Optimize all javascript and styles, move to a build folder, and inject them into the new index.html
 
 - `gulp build`
@@ -268,7 +267,7 @@ The `blocks.router` module contains a routing helper module that assists in addi
 ### Serving Production Code
 
 - `gulp serve-build`
- 
+
     Serve the optimized code from the build folder and launch it in a browser.
 
 - `gulp serve-build --nosync`
@@ -286,8 +285,8 @@ The `blocks.router` module contains a routing helper module that assists in addi
 ### Bumping Versions
 
 - `gulp bump`
- 
-    Bump the minor version using semver. 
+
+    Bump the minor version using semver.
     --type=patch // default
     --type=minor
     --type=major
