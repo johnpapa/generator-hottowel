@@ -29,7 +29,7 @@
     "gulp-bump": "^0.1.11",
     "gulp-bytediff": "^0.2.0",
     "gulp-concat": "^2.3.3",
-    "gulp-csso": "^0.2.9",
+    "gulp-minify-css": "^1.1.1",
     "gulp-filter": "^1.0.2",
     "gulp-header": "^1.2.2",
     "gulp-if": "^1.2.5",
