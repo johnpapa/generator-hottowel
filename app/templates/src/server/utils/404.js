@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function () {
     var service = {
         notFoundMiddleware: notFoundMiddleware,
         send404: send404
