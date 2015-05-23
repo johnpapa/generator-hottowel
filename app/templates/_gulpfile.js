@@ -467,12 +467,12 @@ function getNodeOptions(isDev) {
     };
 }
 
-function runNodeInspector() {
-    log('Running node-inspector.');
-    log('Browse to http://localhost:8080/debug?port=5858');
-    var exec = require('child_process').exec;
-    exec('node-inspector');
-}
+//function runNodeInspector() {
+//    log('Running node-inspector.');
+//    log('Browse to http://localhost:8080/debug?port=5858');
+//    var exec = require('child_process').exec;
+//    exec('node-inspector');
+//}
 
 /**
  * Start BrowserSync
@@ -613,12 +613,12 @@ function bytediffFormatter(data) {
 /**
  * Log an error message and emit the end of a task
  */
-function errorLogger(error) {
-    log('*** Start of Error ***');
-    log(error);
-    log('*** End of Error ***');
-    this.emit('end');
-}
+//function errorLogger(error) {
+//    log('*** Start of Error ***');
+//    log(error);
+//    log('*** End of Error ***');
+//    this.emit('end');
+//}
 
 /**
  * Format a number as a percentage
