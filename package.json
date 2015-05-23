@@ -4,7 +4,10 @@
   "description": "Yeoman generator for HotTowel Angular",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "johnpapa/generator-hottowel",
+  "repository": {
+    "type": "git",
+    "url": "johnpapa/generator-hottowel"
+  },
   "author": {
     "name": "John Papa",
     "email": "",
