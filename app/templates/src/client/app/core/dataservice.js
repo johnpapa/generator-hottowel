@@ -5,9 +5,9 @@
         .module('app.core')
         .factory('dataservice', dataservice);
 
-    dataservice.$inject = ['$http', '$q', 'logger'];
+    dataservice.$inject = ['$http', '$q', 'exception', 'logger'];
     /* @ngInject */
-    function dataservice($http, $q, logger) {
+    function dataservice($http, $q, exception, logger) {
         var service = {
             getPeople: getPeople,
             getMessageCount: getMessageCount
@@ -26,10 +26,8 @@
                 return response.data;
             }
 
-            function fail(error) {
-                var msg = 'query for people failed. ' + error.data.description;
-                logger.error(msg);
-                return $q.reject(msg);
+            function fail(e) {
+                return exception.catcher('XHR Failed for getPeople')(e);
             }
         }
     }
