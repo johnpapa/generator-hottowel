@@ -15,27 +15,27 @@ describe('blocks.exception', function() {
 
     bard.verifyNoOutstandingHttpRequests();
 
-    describe('$exceptionHandler', function() {
+    describe('exceptionHandlerProvider', function() {
         it('should have a dummy test', inject(function() {
             expect(true).to.equal(true);
         }));
 
-        it('should be defined', inject(function($exceptionHandler) {
-            expect($exceptionHandler).to.be.defined;
+        it('should have exceptionHandlerProvider defined', inject(function() {
+            expect(exceptionHandlerProvider).to.be.defined;
         }));
 
-        it('should have configuration', inject(function($exceptionHandler) {
-            expect($exceptionHandler.config).to.be.defined;
+        it('should have configuration', inject(function() {
+            expect(exceptionHandlerProvider.config).to.be.defined;
+        }));
+
+        it('should have configuration', inject(function() {
+            expect(exceptionHandlerProvider.configure).to.be.defined;
         }));
 
         describe('with appErrorPrefix', function() {
             beforeEach(function() {
                 exceptionHandlerProvider.configure(mocks.prefix);
             });
-
-            it('should have exceptionHandlerProvider defined', inject(function() {
-                expect(exceptionHandlerProvider).to.be.defined;
-            }));
 
             it('should have appErrorPrefix defined', inject(function() {
                 expect(exceptionHandlerProvider.$get().config.appErrorPrefix).to.be.defined;
