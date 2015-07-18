@@ -112,7 +112,6 @@ module.exports = function() {
         testlibraries: [
             nodeModules + '/mocha/mocha.js',
             nodeModules + '/chai/chai.js',
-            nodeModules + '/mocha-clean/index.js',
             nodeModules + '/sinon-chai/lib/sinon-chai.js'
         ],
         specHelpers: [client + 'test-helpers/*.js'],
