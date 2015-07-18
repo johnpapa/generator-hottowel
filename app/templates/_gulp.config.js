@@ -80,7 +80,7 @@ module.exports = function() {
             options: {
                 module: 'app.core',
                 root: 'app/',
-                standAlone: false
+                standalone: false
             }
         },
 
