@@ -2,8 +2,6 @@
   "name": "<%= appName %>",
   "description": "<%= appName %> Project Generated from HotTowel Angular",
   "version": "0.0.0",
-  "license": "",
-  "repository": {},
   "scripts": {
     "init": "npm install",
     "install": "bower install",
