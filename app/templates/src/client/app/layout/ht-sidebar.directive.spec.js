@@ -92,7 +92,6 @@ describe('htSidebar directive: ', function () {
         });
 
         it('click triggers "when-done-animating" expression', function () {
-
             // spy on directive's callback when the animation is done
             var spy = sinon.spy();
 
@@ -113,6 +112,7 @@ describe('htSidebar directive: ', function () {
 
             // verify that the vm's method (sidebarReady) was called with '42'
             // FYI: spy.args[0] is the array of args passed to sidebarReady()
+            expect(spy).to.have.been.called;
             expect(spy).to.have.been.calledWith(42);
         });
     });

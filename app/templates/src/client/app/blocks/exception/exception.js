@@ -16,7 +16,7 @@
             return function(e) {
                 var thrownDescription;
                 var newMessage;
-                if(e.data && e.data.description) {
+                if (e.data && e.data.description) {
                     thrownDescription = '\n' + e.data.description;
                     newMessage = message + thrownDescription;
                 }
