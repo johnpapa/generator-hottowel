@@ -1,6 +1,6 @@
 {
   "name": "generator-hottowel",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Yeoman generator for HotTowel Angular",
   "license": "MIT",
   "main": "app/index.js",
@@ -26,17 +26,18 @@
     "yeoman-generator"
   ],
   "dependencies": {
-    "chalk": "^0.5.0",
+    "chalk": "^0.5.1",
+    "yargs": "^3.16.1",
     "yeoman-generator": "^0.17.0",
     "yosay": "^0.3.0"
   },
   "devDependencies": {
-    "gulp": "^3.8.11",
-    "gulp-bump": "^0.1.11",
-    "gulp-load-plugins": "^0.8.0",
-    "gulp-task-listing": "^1.0.0",
-    "gulp-util": "^3.0.1",
-    "yargs": "^1.3.3"
+    "gulp": "^3.9.0",
+    "gulp-bump": "^0.3.1",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-task-listing": "^1.0.1",
+    "gulp-util": "^3.0.6",
+    "yargs": "^3.16.1"
   },
   "peerDependencies": {
     "yo": ">=1.0.0"
