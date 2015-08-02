@@ -1,7 +1,6 @@
 /* jshint -W117, -W030 */
 describe('admin routes', function () {
     describe('state', function () {
-        var controller;
         var view = 'app/admin/admin.html';
 
         beforeEach(function() {

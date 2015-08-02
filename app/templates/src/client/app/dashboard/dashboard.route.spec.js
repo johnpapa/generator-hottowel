@@ -1,7 +1,6 @@
 /* jshint -W117, -W030 */
 describe('dashboard routes', function () {
     describe('state', function () {
-        var controller;
         var view = 'app/dashboard/dashboard.html';
 
         beforeEach(function() {
