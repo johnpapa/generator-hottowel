@@ -15,6 +15,10 @@
             resolveAlways: {}
         };
 
+        if (!(window.history && window.history.pushState)) {
+            window.location.hash = '/'
+        }
+
         $locationProvider.html5Mode(true);
 
         this.configure = function(cfg) {
