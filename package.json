@@ -38,8 +38,5 @@
     "gulp-task-listing": "^1.0.1",
     "gulp-util": "^3.0.6",
     "yargs": "^3.16.1"
-  },
-  "peerDependencies": {
-    "yo": ">=1.0.0"
   }
 }
