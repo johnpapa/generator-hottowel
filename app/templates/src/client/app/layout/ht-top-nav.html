@@ -1,13 +1,13 @@
 <nav class="navbar navbar-fixed-top navbar-inverse">
     <div class="navbar-header">
         <a href="/" class="navbar-brand"><span class="brand-title">{{vm.navline.title}}</span></a>
-        <a class="btn navbar-btn navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <a class="btn navbar-btn navbar-toggle" ng-click="isCollapsed = !isCollapsed">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </a>
     </div>
-    <div class="navbar-collapse collapse">
+    <div class="navbar-collapse collapse" uib-collapse="isCollapsed">
         <div class="pull-right navbar-logo">
             <ul class="nav navbar-nav pull-right">
                 <li>
