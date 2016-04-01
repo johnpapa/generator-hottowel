@@ -18,9 +18,12 @@
             templateUrl: 'app/layout/ht-top-nav.html'
         };
 
+        TopNavController.$inject = ['$scope'];
+
         /* @ngInject */
-        function TopNavController() {
+        function TopNavController($scope) {
             var vm = this;
+            $scope.isCollapsed = true;
         }
 
         return directive;
