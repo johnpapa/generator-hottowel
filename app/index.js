@@ -2,17 +2,18 @@
 var util = require('util');
 var path = require('path');
 var yeoman = require('yeoman-generator');
-var generators = yeoman.generators;
 var yosay = require('yosay');
 var chalk = require('chalk');
-var _ = require('underscore.string');
+var _ = require('lodash');
+var str = require('underscore.string');
+_.mixin(str);
 
-var HotTowelGenerator = generators.Base.extend({
+var HotTowelGenerator = yeoman.Base.extend({
 
   constructor: function() {
     // arguments and options should be
     // defined in the constructor.
-    generators.Base.apply(this, arguments);
+    yeoman.Base.apply(this, arguments);
 
     this.argument('appName', { type: String, required: false });
     this.appName = _.camelize(_.slugify(_.humanize(this.appName)));
@@ -48,13 +49,6 @@ var HotTowelGenerator = generators.Base.extend({
 
   displayName: function() {
     this.log('Creating ' + this.appName + ' app based on HotTowel.');
-  },
-
-  scaffoldFolders: function() {
-    this.mkdir('src');
-    this.mkdir('src/client');
-    this.mkdir('src/client/app');
-    this.mkdir('src/server');
   },
 
   packageFiles: function() {
