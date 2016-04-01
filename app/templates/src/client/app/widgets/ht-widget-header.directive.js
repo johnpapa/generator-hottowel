@@ -21,8 +21,18 @@
                 'allowCollapse': '@'
             },
             templateUrl: 'app/widgets/widget-header.html',
-            restrict: 'EA'
+            restrict: 'EA',
+            link: link
         };
         return directive;
+
+        function link(scope, element, attr) {
+            scope.toggleContent = function() {
+                if (scope.allowCollapse === 'true') {
+                    var content = angular.element(element).siblings('.widget-content');
+                    content.toggle();
+                }
+            };
+        }
     }
 })();
