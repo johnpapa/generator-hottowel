@@ -34,8 +34,10 @@
     },
     "overrides": {
         "bootstrap": {
-            "main": "dist/css/bootstrap.css",
-            "dist": "dist/js/bootstrap.js"
+            "main": [
+                "dist/css/bootstrap.css",
+                "dist/js/bootstrap.js"
+            ]
         }
     }
 }
