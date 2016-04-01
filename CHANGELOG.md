@@ -1,5 +1,18 @@
 #generator-hottowel
 
+## 0.4.0 - Wuttus-tookusuous-solongous
+
+### Features
+- Updated to Angular 1.5 and all related dependencies
+- Updated all bower dependencies to latest
+- Updated to latest yeoman, thus also refactoring code for its breaking changes
+  - These do not affect hot towel usage
+- Updated to PhantomJS 2
+- Changed all indentation logic to use 2 space indentations (updated jshint, jscs, and editorconfig)
+
+### Bug Fixes
+- Merged many PRs for minor enhancements to the drop down menu to work in responsive mode
+
 ## 0.2.9 - Correctorus Maximus Erronoeous
 
 ### Features
