@@ -1,64 +1,67 @@
 <!DOCTYPE html>
 <html>
+
 <head lang="en">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
-    <title>Spec Runner</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+  <title>Spec Runner</title>
 
-    <style>
-        body {
-            font: 20px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
-            padding-left: 20px;
-        }
-    </style>
+  <style>
+    body {
+      font: 20px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+      padding-left: 20px;
+    }
+  </style>
 
-    <!--BEWARE of using any app styles as @media can screw up tests -->
+  <!--BEWARE of using any app styles as @media can screw up tests -->
 
-    <link rel="stylesheet" href="/node_modules/mocha/mocha.css">
+  <link rel="stylesheet" href="/node_modules/mocha/mocha.css">
 
 </head>
+
 <body>
 
-<h1><a href="specs.html">Spec Runner</a></h1>
-<p><strong>Make sure the REMOTE server is running</strong><br/>
-    Click on a <em>description title</em> to narrow the scope to just its specs
-    (see "<a href="http://mochajs.github.io/mocha/#grep-option" target="_blank" title="MochaJS grep option">
-        ?grep</a>" in address bar).<br/>
-    Click on a <em>spec title</em> to see the test implementation.<br/>
-    Click on <em>page title</em> to start over.
-</p>
+  <h1><a href="specs.html">Spec Runner</a></h1>
+  <p><strong>Make sure the REMOTE server is running</strong>
+    <br/> Click on a <em>description title</em> to narrow the scope to just its specs (see "<a href="http://mochajs.github.io/mocha/#grep-option"
+    target="_blank" title="MochaJS grep option">
+        ?grep</a>" in address bar).
+    <br/> Click on a <em>spec title</em> to see the test implementation.
+    <br/> Click on <em>page title</em> to start over.
+  </p>
 
-<div id="mocha"></div>
+  <div id="mocha"></div>
 
-    <!-- inject:testlibraries:js -->
-    <!-- endinject -->
+  <!-- inject:testlibraries:js -->
+  <!-- endinject -->
 
-    <script>
-        expect = chai.expect;
+  <script>
+    expect = chai.expect;
         AssertionError = chai.AssertionError;
         mocha.setup('bdd');
         mocha.traceIgnores = ['mocha.js', 'chai.js', 'angular.js'];
-    </script>
+  </script>
 
-    <!-- bower:js -->
-    <!-- endbower -->
+  <!-- bower:js -->
+  <!-- endbower -->
 
-    <!-- inject:js -->
-    <!-- endinject -->
+  <!-- inject:js -->
+  <!-- endinject -->
 
-    <!-- inject:spechelpers:js -->
-    <!-- endinject -->
+  <!-- inject:spechelpers:js -->
+  <!-- endinject -->
 
-    <!-- inject:specs:js -->
-    <!-- endinject -->
+  <!-- inject:specs:js -->
+  <!-- endinject -->
 
-    <!-- inject:templates:js -->
-    <!-- endinject -->
+  <!-- inject:templates:js -->
+  <!-- endinject -->
 
-    <script>
-        mocha.run();
-    </script>
+  <script>
+    mocha.run();
+  </script>
 
 </body>
+
 </html>
