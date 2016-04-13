@@ -9,9 +9,9 @@ reduced test case (without any external dependencies)_.
 
 ### Please specify which version of `generator-hottowel`, node and npm you're running
 
-- generator-hottowel [    ]
-- Node               [    ]
-- Npm                [    ]
+- [ ] generator-hottowel
+- [ ] Node
+- [ ] Npm
 
 ### Affected platforms
 
