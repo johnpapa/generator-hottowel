@@ -508,6 +508,9 @@ function startBrowserSync(isDev, specRunner) {
       '!' + config.less,
       config.temp + '**/*.css'
     ] : [],
+    watchOptions: {
+      ignored: ['node_modules', 'bower_components']
+    },
     ghostMode: { // these are the defaults t,f,t,t
       clicks: true,
       location: false,
