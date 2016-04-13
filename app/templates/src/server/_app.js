@@ -30,6 +30,17 @@ switch (environment) {
     app.use('/app/*', function(req, res, next) {
       four0four.send404(req, res);
     });
+    // Invalid calls to assets should return the custom error object to mitigate 
+    // against XSS reflected attacks
+    app.use('/js/*', function(req, res, next) {
+        four0four.send404(req, res);
+    });
+    app.use('/images/*', function(req, res, next) {
+        four0four.send404(req, res);
+    });
+    app.use('/styles/*', function(req, res, next) {
+        four0four.send404(req, res);
+    });
     // Any deep link calls should return index.html
     app.use('/*', express.static('./build/index.html'));
     break;
