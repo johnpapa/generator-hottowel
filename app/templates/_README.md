@@ -46,6 +46,7 @@
     ```bash
     gulp test-e2e
     ```
+
 ### Running in dev mode
  - Run the project with `gulp serve-dev`
 
