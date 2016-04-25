@@ -7,6 +7,7 @@ var gulp = require('gulp');
 var path = require('path');
 var _ = require('lodash');
 var $ = require('gulp-load-plugins')({ lazy: true });
+var protractor = $.protractor.protractor;
 
 var colors = $.util.colors;
 var envenv = $.util.env;
@@ -311,6 +312,13 @@ gulp.task('test', ['vet', 'templatecache'], function(done) {
 });
 
 /**
+ * Runs the e2e specs using protractor.
+ */
+gulp.task('test-e2e', ['vet'], function(done) {
+  runProtractor(done);
+});
+
+/**
  * Run specs and wait.
  * Watch for file changes and re-run tests on each change
  * To start servers and run midway specs as well:
@@ -480,6 +488,30 @@ function getNodeOptions(isDev) {
 //}
 
 /**
+ * Start e2e tests using Protractor.
+ * @param {function} done Callback when protractor has finished its operation.
+ * @return {Stream}
+ */
+function runProtractor(done) {
+  log('Running e2e Protractor Specs...');
+
+  return gulp
+    .src([config.scenarios], {read: false})
+    .pipe($.plumber())
+    .pipe(protractor({
+      configFile: './protractor.config.js'
+    }))
+    .on('error', function() {
+      log('Protractor Error.');
+      done();
+    })
+    .on('end', function() {
+      log('Protractor End.');
+      done();
+    });
+}
+
+/**
  * Start BrowserSync
  * --nosync will avoid browserSync
  */
@@ -570,6 +602,8 @@ function startTests(singleRun, done) {
   var fork = require('child_process').fork;
   var Karma = require('karma').Server;
   var serverSpecs = config.serverIntegrationSpecs;
+  var e2eSpecs = [config.scenarios];
+  var excludeSpecs = [].concat(serverSpecs, e2eSpecs);
 
   if (args.startServers) {
     log('Starting servers');
@@ -578,8 +612,9 @@ function startTests(singleRun, done) {
     savedEnv.PORT = 8888;
     child = fork(config.nodeServer);
   } else {
-    if (serverSpecs && serverSpecs.length) {
-      excludeFiles = serverSpecs;
+    // make sure server and e2e specs are not run through karma
+    if (excludeSpecs && excludeSpecs.length) {
+      excludeFiles = excludeSpecs;
     }
   }
 
