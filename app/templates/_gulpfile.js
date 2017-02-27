@@ -314,9 +314,9 @@ gulp.task('test', ['vet', 'templatecache'], function(done) {
 /**
  * Runs the e2e specs using protractor.
  */
-gulp.task('test-e2e', ['vet'], function(done) {
-  runProtractor(done);
-});
+// gulp.task('e2e', ['vet'], function(done) {
+//   runProtractor(done);
+// });
 
 /**
  * Run specs and wait.
@@ -487,29 +487,29 @@ function getNodeOptions(isDev) {
 //    exec('node-inspector');
 //}
 
-/**
- * Start e2e tests using Protractor.
- * @param {function} done Callback when protractor has finished its operation.
- * @return {Stream}
- */
-function runProtractor(done) {
-  log('Running e2e Protractor Specs...');
+// /**
+//  * Start e2e tests using Protractor.
+//  * @param {function} done Callback when protractor has finished its operation.
+//  * @return {Stream}
+//  */
+// function runProtractor(done) {
+//   log('Running e2e Protractor Specs...');
 
-  return gulp
-    .src([config.scenarios], {read: false})
-    .pipe($.plumber())
-    .pipe(protractor({
-      configFile: './protractor.config.js'
-    }))
-    .on('error', function() {
-      log('Protractor Error.');
-      done();
-    })
-    .on('end', function() {
-      log('Protractor End.');
-      done();
-    });
-}
+//   return gulp
+//     .src([config.scenarios], {read: false})
+//     .pipe($.plumber())
+//     .pipe(protractor({
+//       configFile: './protractor.config.js'
+//     }))
+//     .on('error', function() {
+//       log('Protractor Error.');
+//       done();
+//     })
+//     .on('end', function() {
+//       log('Protractor End.');
+//       done();
+//     });
+// }
 
 /**
  * Start BrowserSync
