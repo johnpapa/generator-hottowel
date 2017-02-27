@@ -31,9 +31,9 @@
  - Run the unit tests using `gulp test` (via karma, mocha, sinon).
 
 ### E2E Tests
- - Run e2e unit tests using `gulp test-e2e` (via protractor).
+ - Run e2e unit tests using `gulp e2e` (via protractor).
  - Make sure that the server is running with either `gulp serve-build` or 
-`gulp serve-dev` in a separate terminal prior to running `gulp test-e2e`.
+`gulp serve-dev` in a separate terminal prior to running `gulp e2e`.
 
  - Example
 
@@ -44,7 +44,7 @@
 
   Bash Terminal 2
     ```bash
-    gulp test-e2e
+    gulp e2e
     ```
 
 ### Running in dev mode

@@ -314,7 +314,7 @@ gulp.task('test', ['vet', 'templatecache'], function(done) {
 /**
  * Runs the e2e specs using protractor.
  */
-gulp.task('test-e2e', ['vet'], function(done) {
+gulp.task('e2e', ['vet'], function(done) {
   runProtractor(done);
 });
 
