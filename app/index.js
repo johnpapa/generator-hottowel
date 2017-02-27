@@ -60,6 +60,7 @@ var HotTowelGenerator = yeoman.Base.extend({
     this.template('_bower.json', 'bower.json');
     this.template('_gulpfile.js', 'gulpfile.js');
     this.template('_gulp.config.js', 'gulp.config.js');
+    this.template('_protractor.config.js', 'protractor.config.js');
     this.template('_karma.conf.js', 'karma.conf.js');
     this.template('_README.md', 'README.md');
   },
@@ -76,6 +77,7 @@ var HotTowelGenerator = yeoman.Base.extend({
     this.directory('src/client/app');
     this.directory('src/client/images');
     this.directory('src/client/styles');
+    this.directory('src/client/test');
     this.directory('src/client/test-helpers');
 
     this.template('src/client/_index.html', 'src/client/index.html');
