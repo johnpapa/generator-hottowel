@@ -1,5 +1,13 @@
 #generator-hottowel
 
+## 0.6.0 - Nodalous-Ate-Us
+
+### Features
+- Updated to recent Sinon version
+
+### Bug Fixes
+- Updated nodemon in the gulpfile to use --inspect or --debug based on the node version (using semver package)
+
 ## 0.4.0 - Wuttus-tookusuous-solongous
 
 ### Features
@@ -79,7 +87,7 @@ none
 
 ### Features
 
-- abstracted more of `karma.conf.js` out to `gulp.config.js` 
+- abstracted more of `karma.conf.js` out to `gulp.config.js`
 - added `gulp-bump` and a related task
 - a ton of refactoring to make the `gulp.config.js` more readable
 - added nodemon logging
