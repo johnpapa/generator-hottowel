@@ -73,6 +73,7 @@
     "node-notifier": "~4.0.3",
     "plato": "~1.2.0",
     "q": "~1.0.1",
+    "semver": "~5.3.0",
     "sinon": "~1.15.0",
     "sinon-chai": "~2.6.0",
     "wiredep": "~2.2.2",
