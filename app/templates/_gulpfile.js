@@ -453,7 +453,7 @@ function getNodeOptions(isDev) {
     env: {
       "PORT": port,
       "NODE_ENV": isDev ? 'dev' : 'build'
-    }
+    },
     watch: [config.server]
   };
 }

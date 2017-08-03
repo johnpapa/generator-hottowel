@@ -1,12 +1,13 @@
 #generator-hottowel
 
-## 0.6.0 - Nodalous-Ate-Us
+## 0.6.1 - Nodalous-Ate-Us
 
 ### Features
 - Updated to recent Sinon version
 
 ### Bug Fixes
 - Updated nodemon in the gulpfile to use --inspect or --debug based on the node version (using semver package)
+- Missing comma fix
 
 ## 0.4.0 - Wuttus-tookusuous-solongous
 
